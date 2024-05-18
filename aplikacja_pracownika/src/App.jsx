@@ -1,4 +1,4 @@
-import { useState} from 'react';
+import {useState} from 'react';
 import './App.css';
 import defaultProfilePicture from './assets/default_profile_picture.png';
 import dogsEvent from './assets/dogs.jpeg';
@@ -32,21 +32,18 @@ function App() {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleEventImageChange = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            setCurrentEvent({ ...currentEvent, image: URL.createObjectURL(e.target.files[0]) }); // Aktualizuj stan bieżącego wydarzenia
-        }
+        if (e.target.files && e.target.files[0])
+            setCurrentEvent({ ...currentEvent, image: URL.createObjectURL(e.target.files[0]) });
     };
 
     const handleProfileImageChange = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            setImage(URL.createObjectURL(e.target.files[0])); // Aktualizuj stan zdjęcia profilowego
-        }
+        if (e.target.files && e.target.files[0])
+            setImage(URL.createObjectURL(e.target.files[0]));
     };
 
     const handleImageChange = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            setNewEvent({ ...newEvent, image: URL.createObjectURL(e.target.files[0]) }); // Aktualizuj stan nowego wydarzenia
-        }
+        if (e.target.files && e.target.files[0])
+            setNewEvent({ ...newEvent, image: URL.createObjectURL(e.target.files[0]) });
     };
 
     const handleAddEvent = () => {
@@ -81,10 +78,13 @@ function App() {
                         {image && <img src={image} alt="Profile" className="profile-img" />}
                         <input type="file" onChange={handleProfileImageChange} />
                     </div>
+
                     <label>Imię i nazwisko:</label>
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+
                     <label>O tobie:</label>
                     <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={13} />
+
                     <button onClick={() => setShowPopup(true)}>Dodaj wydarzenie</button>
                     <button>Wyloguj się</button>
                 </div>
@@ -93,40 +93,27 @@ function App() {
                 {events.map((event) => (
                     <div key={event.id} className="event-card">
                         <div className="event-details">
-                            <table className="event-table">
-                                <tbody>
-                                <tr>
-                                    <td className="event-name">Nazwa: {event.name}</td>
-                                    <td className="event-date">Data: {event.date} {event.time}</td>
-                                    <td className="event-status">Status: {event.status}</td>
-                                    <td className="event-like-counter">Like: {event.like}</td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <table className="event-table"> <tbody> <tr>
+                                <td>Nazwa: {event.name}</td>
+                                <td>Data: {event.date} {event.time}</td>
+                                <td>Status: {event.status}</td>
+                                <td>Like: {event.like}</td>
+                            </tr> </tbody> </table>
                             {event.image && (
-                                <img
-                                    src={event.image}
-                                    alt="Obrazek wydarzenia"
-                                    className="event-img"
-                                    onClick={() => setSelectedImage(event.image)}
-                                />
+                                <img src={event.image} alt="Obrazek wydarzenia" className="event-img"
+                                    onClick={() => setSelectedImage(event.image)}/>
                             )}
-                            <div className="event-body">
-                                <p className="event-details-description">{event.details}</p>
-                            </div>
+                            <p>{event.details}</p>
                         </div>
                         <div className="event-actions">
-                            <button onClick={() => {
-                                setCurrentEvent(event);
-                                setShowEditPopup(true);
-                            }}>Edytuj
-                            </button>
+                            <button onClick={() => {setCurrentEvent(event);setShowEditPopup(true);
+                            }}> Edytuj </button>
+
                             <button onClick={() => {
                                 if (window.confirm("Czy na pewno chcesz usunąć to wydarzenie?")) {
                                     handleDeleteEvent(event.id);
                                 }
-                            }}>Usuń
-                            </button>
+                            }}> Usuń </button>
                         </div>
                     </div>
                 ))}
@@ -136,21 +123,26 @@ function App() {
                     <div className="popup-content">
                         <h3>Dodaj nowe wydarzenie</h3>
                         {formError && <p style={{color: 'red'}}>{formError}</p>}
+
                         <label>Nazwa wydarzenia:</label>
                         <input type="text" value={newEvent.name}
                                onChange={(e) => setNewEvent({...newEvent, name: e.target.value})}/>
+
                         <label>Data rozpoczęcia:</label>
                         <input type="date" value={newEvent.date}
                                onChange={(e) => setNewEvent({...newEvent, date: e.target.value})}/>
+
                         <label>Godzina:</label>
                         <input type="time" value={newEvent.time}
                                onChange={(e) => setNewEvent({...newEvent, time: e.target.value})}/>
+
                         <label>Dodatkowe informacje:</label>
                         <textarea value={newEvent.details}
-                                  onChange={(e) => setNewEvent({...newEvent, details: e.target.value})}
-                        />
+                                  onChange={(e) => setNewEvent({...newEvent, details: e.target.value})}/>
+
                         <label>Dodaj zdjęcie</label>
                         <input type="file" onChange={handleImageChange} />
+
                         <button onClick={() => setShowPopup(false)}>Wróć</button>
                         <button onClick={handleAddEvent}>Zatwierdź</button>
                     </div>
@@ -163,17 +155,22 @@ function App() {
                         <label>Nazwa wydarzenia:</label>
                         <input type="text" value={currentEvent.name}
                                onChange={(e) => setCurrentEvent({...currentEvent, name: e.target.value})}/>
+
                         <label>Data rozpoczęcia:</label>
                         <input type="date" value={currentEvent.date}
                                onChange={(e) => setCurrentEvent({...currentEvent, date: e.target.value})}/>
+
                         <label>Godzina:</label>
                         <input type="time" value={currentEvent.time}
                                onChange={(e) => setCurrentEvent({...currentEvent, time: e.target.value})}/>
+
                         <label>Dodatkowe informacje:</label>
                         <textarea value={currentEvent.details}
                                   onChange={(e) => setCurrentEvent({...currentEvent, details: e.target.value})}/>
+
                         <label>Dodaj zdjęcie</label>
                         <input type="file" onChange={handleEventImageChange}/>
+
                         <button onClick={() => setShowEditPopup(false)}>Wróć</button>
                         <button onClick={handleEditEvent}>Zatwierdź</button>
                     </div>
