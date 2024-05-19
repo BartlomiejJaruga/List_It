@@ -3,7 +3,6 @@ package com.server.list_it.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -36,6 +35,6 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Issue> issues;
 
-    @OneToMany(mappedBy = "comments")
-    private List<Comment> comment;
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
 }

@@ -32,6 +32,6 @@ public class Event {
 
     private Integer likes;
 
-    @OneToMany(mappedBy = "comments")
+    @OneToMany(mappedBy = "event")
     private List<Comment> comments;
 }
