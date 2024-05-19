@@ -1,0 +1,44 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 2px solid var(--black);
+    padding: 2px;
+    height: 3.5rem;
+  }
+  
+  th {
+    cursor: pointer;
+    background-color: var(--darkerblue);
+  }
+
+  th:first-child {
+    cursor: default;
+    padding: 0 0.5rem;
+  }
+
+  th:last-child {
+    background-color: var(--red);
+  }
+  
+  th.sort-ascending::after {
+    content: " ▲";
+  }
+  
+  th.sort-descending::after {
+    content: " ▼";
+  }
+  
+tr {
+    text-align: center;
+}
+
+  tr:nth-child(odd) {
+    background-color: var(--grey);
+  }
+  
+  input[type="checkbox"] {
+    transform: scale(2);
+  }
