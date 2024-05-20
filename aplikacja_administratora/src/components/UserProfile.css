@@ -1,0 +1,47 @@
+.photo_and_buttons {
+  margin: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+#user_photo {
+  border: 2px solid var(--black);
+  height: 7rem;
+  width: auto;
+  max-width: 7rem;
+}
+
+.user_profile_buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+  
+.user_profile_buttons button {
+    width: 8.5rem;
+    border: 2px solid var(--black);
+    border-radius: 10rem;
+    height: 2.5rem;
+    cursor: pointer;
+}
+
+#user_profile_add_photo_btn {
+    background-color: var(--orange);
+}
+
+#user_profile_remove_photo_btn {
+    background-color: var(--red);
+}
+
+.user_info {
+  margin: 0 2rem;
+  background-color: var(--white);
+  border: 2px var(--black) solid;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.user_info p {
+  margin: 0.5rem;
+}

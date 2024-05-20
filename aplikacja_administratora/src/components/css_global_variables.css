@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+
+:root {
+    --lightblue: #6ECEF5;
+    --darkerblue: #5765FF;
+    --orange: #F59C10;
+    --white: #F5F5F5;
+    --grey: #BFBFBF;
+    --purewhite: #FFFFFF;
+    --black: #3D3D3D;
+    --pureblack: #000000;
+    --green: #71E45E;
+    --red: #F84848;
+}

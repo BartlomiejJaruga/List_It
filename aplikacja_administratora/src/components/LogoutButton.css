@@ -1,0 +1,11 @@
+.logout-button {
+    align-self: flex-end;
+    margin: 10vh 2rem 0 2rem;
+    border: 2px solid var(--black);
+    border-radius: 10rem;
+    background-color: var(--red);
+    font-size: 1.5rem;
+    height: 4rem;
+    width: 80%;
+    color: var(--pureblack);
+  }
