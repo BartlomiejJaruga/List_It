@@ -12,14 +12,22 @@ function Register({ onToggleLogin }) {
         formPassword: "",
         formConfirmPassword: "",
     });
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (event) => {
+        event.preventDefault();
         const form = event.currentTarget;
+
+        if (formData.formPassword !== formData.formConfirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
         if (!form.checkValidity()) {
-            event.preventDefault();
             event.stopPropagation();
+            setValidated(true);
         } else {
-            event.preventDefault();
+            setIsLoading(true);
             try {
                 const response = await fetch("http://localhost:8081/register", {
                     method: "POST",
@@ -40,7 +48,7 @@ function Register({ onToggleLogin }) {
                 console.error("Error registering user:", error);
                 // Handle connection or other errors
             }
-            setValidated(true);
+            setIsLoading(false);
         }
     };
 
@@ -53,7 +61,7 @@ function Register({ onToggleLogin }) {
     };
 
     return (
-        <Container fluid className="d-flex justify-content-center align-items-center vh-100">
+        <Container fluid className="d-flex justify-content-center align-items-center align-self-center vh-100">
             <Row className="justify-content-center align-items-center w-100">
                 <Col xs={12}>
                     <Card
@@ -156,7 +164,6 @@ function Register({ onToggleLogin }) {
                                             value={formData.formConfirmPassword}
                                             onChange={handleChange}
                                             required
-                                            pattern={formData.formPassword}
                                             size="lg"
                                         />
                                         <Form.Control.Feedback type="invalid">
@@ -170,6 +177,7 @@ function Register({ onToggleLogin }) {
                                 >
                                     <Button
                                         type="submit"
+                                        disabled={isLoading}
                                         sx={{
                                             color: "#FFFFFF",
                                             borderRadius: "4px",
@@ -177,7 +185,7 @@ function Register({ onToggleLogin }) {
                                             fontSize: "1rem",
                                         }}
                                     >
-                                        Register
+                                        {isLoading ? "Registering..." : "Register"}
                                     </Button>
                                 </Row>
                             </Form>
