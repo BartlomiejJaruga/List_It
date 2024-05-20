@@ -3,7 +3,7 @@ import './LogoutButton.css';
 
 function LogoutButton() {
   return (
-    <button className="logout-button">Wyloguj się</button>
+    <button className="logout-button">Wyloguj się</button> 
   );
 }
 

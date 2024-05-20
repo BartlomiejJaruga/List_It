@@ -15,7 +15,7 @@ function EventsTableHeader({ onSort }) {
       <th onClick={() => handleSort('description')}>Opis</th>
       <th onClick={() => handleSort('organizer')}>Organizator</th>
       <th onClick={() => handleSort('status')}>Status</th>
-      <th>Akcja</th>
+      <th>Usuń</th>
     </tr>
   );
 }
