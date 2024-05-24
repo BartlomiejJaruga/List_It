@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
     @Autowired
@@ -28,5 +28,22 @@ public class UserController {
     public ResponseEntity<User> registerUser(@RequestBody User user) {
         User savedUser = userService.createUser(user);
         return ResponseEntity.ok(savedUser);
+    }
+
+
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse> loginUser(@RequestBody User loginRequest) {
+        User user = userService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
+        if (user != null) {
+            ApiResponse response = new ApiResponse();
+            response.setMessage("Login successful");
+            response.setStatus(true);
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse response = new ApiResponse();
+            response.setMessage("Invalid email or password");
+            response.setStatus(false);
+            return ResponseEntity.status(401).body(response);
+        }
     }
 }

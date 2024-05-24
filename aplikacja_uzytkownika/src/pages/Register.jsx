@@ -1,33 +1,27 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Form, Container, Row, Col, Card } from "react-bootstrap";
 import Button from "@mui/material/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles/Register.css";
 
-function Register({ onToggleLogin }) {
+function Register() {
     const [validated, setValidated] = useState(false);
     const [formData, setFormData] = useState({
-        formFullName: "",
-        formEmail: "",
-        formPassword: "",
-        formConfirmPassword: "",
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
     });
-    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
         const form = event.currentTarget;
-
-        if (formData.formPassword !== formData.formConfirmPassword) {
-            alert("Passwords do not match!");
-            return;
-        }
-
         if (!form.checkValidity()) {
+            event.preventDefault();
             event.stopPropagation();
-            setValidated(true);
         } else {
-            setIsLoading(true);
+            event.preventDefault();
             try {
                 const response = await fetch("http://localhost:8081/register", {
                     method: "POST",
@@ -39,16 +33,14 @@ function Register({ onToggleLogin }) {
                 if (response.ok) {
                     const userData = await response.json();
                     console.log("User registered successfully:", userData);
-                    // Handle successful registration
+                    navigate("/"); // Redirect to HomePage
                 } else {
                     console.error("Failed to register user:", response.statusText);
-                    // Handle registration failure
                 }
             } catch (error) {
                 console.error("Error registering user:", error);
-                // Handle connection or other errors
             }
-            setIsLoading(false);
+            setValidated(true);
         }
     };
 
@@ -65,7 +57,7 @@ function Register({ onToggleLogin }) {
             <Row className="justify-content-center align-items-center w-100">
                 <Col xs={12}>
                     <Card
-                        className="bg-dark text-white my-5 mx-auto"
+                        className="bg-dark text-white mx-auto"
                         style={{ borderRadius: "1rem", maxWidth: "900px" }}
                     >
                         <Card.Body className="p-5 d-flex flex-column align-items-center mx-auto w-100">
@@ -80,19 +72,17 @@ function Register({ onToggleLogin }) {
                                 className="w-100"
                             >
                                 <Row className="mb-3">
-                                    <Form.Group as={Col} md="12" controlId="formFullName">
+                                    <Form.Group as={Col} md="12" controlId="name">
                                         <Form.Label
-                                            className={`text-white ${
-                                                formData.formFullName ? "label-visible" : "label-fade"
-                                            }`}
+                                            className={`text-white ${formData.name ? "label-visible" : "label-fade"}`}
                                         >
                                             Full Name
                                         </Form.Label>
                                         <Form.Control
                                             type="text"
-                                            placeholder={!formData.formFullName ? "Full Name" : ""}
-                                            name="formFullName"
-                                            value={formData.formFullName}
+                                            placeholder={!formData.name ? "Full Name" : ""}
+                                            name="name"
+                                            value={formData.name}
                                             onChange={handleChange}
                                             required
                                             size="lg"
@@ -103,19 +93,17 @@ function Register({ onToggleLogin }) {
                                     </Form.Group>
                                 </Row>
                                 <Row className="mb-3">
-                                    <Form.Group as={Col} md="12" controlId="formEmail">
+                                    <Form.Group as={Col} md="12" controlId="email">
                                         <Form.Label
-                                            className={`text-white ${
-                                                formData.formEmail ? "label-visible" : "label-fade"
-                                            }`}
+                                            className={`text-white ${formData.email ? "label-visible" : "label-fade"}`}
                                         >
                                             Email Address
                                         </Form.Label>
                                         <Form.Control
                                             type="email"
-                                            placeholder={!formData.formEmail ? "Email Address" : ""}
-                                            name="formEmail"
-                                            value={formData.formEmail}
+                                            placeholder={!formData.email ? "Email Address" : ""}
+                                            name="email"
+                                            value={formData.email}
                                             onChange={handleChange}
                                             required
                                             size="lg"
@@ -126,19 +114,17 @@ function Register({ onToggleLogin }) {
                                     </Form.Group>
                                 </Row>
                                 <Row className="mb-3">
-                                    <Form.Group as={Col} md="12" controlId="formPassword">
+                                    <Form.Group as={Col} md="12" controlId="password">
                                         <Form.Label
-                                            className={`text-white ${
-                                                formData.formPassword ? "label-visible" : "label-fade"
-                                            }`}
+                                            className={`text-white ${formData.password ? "label-visible" : "label-fade"}`}
                                         >
                                             Password
                                         </Form.Label>
                                         <Form.Control
                                             type="password"
-                                            placeholder={!formData.formPassword ? "Password" : ""}
-                                            name="formPassword"
-                                            value={formData.formPassword}
+                                            placeholder={!formData.password ? "Password" : ""}
+                                            name="password"
+                                            value={formData.password}
                                             onChange={handleChange}
                                             required
                                             size="lg"
@@ -149,19 +135,19 @@ function Register({ onToggleLogin }) {
                                     </Form.Group>
                                 </Row>
                                 <Row className="mb-3">
-                                    <Form.Group as={Col} md="12" controlId="formConfirmPassword">
+                                    <Form.Group as={Col} md="12" controlId="confirmPassword">
                                         <Form.Label
                                             className={`text-white ${
-                                                formData.formConfirmPassword ? "label-visible" : "label-fade"
+                                                formData.confirmPassword ? "label-visible" : "label-fade"
                                             }`}
                                         >
                                             Confirm Password
                                         </Form.Label>
                                         <Form.Control
                                             type="password"
-                                            placeholder={!formData.formConfirmPassword ? "Confirm Password" : ""}
-                                            name="formConfirmPassword"
-                                            value={formData.formConfirmPassword}
+                                            placeholder={!formData.confirmPassword ? "Confirm Password" : ""}
+                                            name="confirmPassword"
+                                            value={formData.confirmPassword}
                                             onChange={handleChange}
                                             required
                                             size="lg"
@@ -171,13 +157,9 @@ function Register({ onToggleLogin }) {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
-                                <Row
-                                    className="d-grid gap-2 col-6 mx-auto"
-                                    style={{ marginTop: "2rem" }}
-                                >
+                                <Row className="d-grid gap-2 col-6 mx-auto" style={{ marginTop: "2rem" }}>
                                     <Button
                                         type="submit"
-                                        disabled={isLoading}
                                         sx={{
                                             color: "#FFFFFF",
                                             borderRadius: "4px",
@@ -185,14 +167,14 @@ function Register({ onToggleLogin }) {
                                             fontSize: "1rem",
                                         }}
                                     >
-                                        {isLoading ? "Registering..." : "Register"}
+                                        Register
                                     </Button>
                                 </Row>
                             </Form>
                             <div className="text-center pt-3">
                                 <p className="mb-0">
                                     Already have an account?{" "}
-                                    <a href="#!" className="text-white-50 fw-bold" onClick={onToggleLogin}>
+                                    <a href="/login" className="text-white-50 fw-bold">
                                         Login
                                     </a>
                                 </p>
