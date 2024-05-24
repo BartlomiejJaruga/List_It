@@ -1,17 +1,27 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     /* fallback for old browsers */
     background: #6a11cb;
-
     /* Chrome 10-25, Safari 5.1-6 */
     background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
 .mdb-input {
     width: 95%; /* or any other percentage or fixed width you prefer */
     margin: auto; /* centers the input box if it's not full-width */
 }
+
 .label-fade {
     transition: opacity 0.5s ease-out;
     opacity: 0;
@@ -19,4 +29,19 @@ body {
 
 .label-visible {
     opacity: 1;
+}
+
+.container-fluid {
+    height: 100%;
+}
+
+.card {
+    max-width: 900px;
+    border-radius: 1rem;
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.card-body {
+    padding: 2rem;
 }
