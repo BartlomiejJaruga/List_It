@@ -1,3 +1,25 @@
+@import 'css_global_variables.css';
+
+@media (max-height: 1200px){
+  * {
+    font-size: 20px;
+  }
+}
+
+@media (max-height: 768px){
+  * {
+    font-size: 16px;
+  }
+}
+
+
+* {
+  font-family: 'Roboto Slab', serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  margin: 0;
+}
+
 /* src/Login.css */
 .login-container {
   display: flex;

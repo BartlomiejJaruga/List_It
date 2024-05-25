@@ -1,0 +1,6 @@
+.app_header{
+    height: 10vh;
+    width: 100vw;
+    background-color: var(--lightblue);
+    display: flex;
+}
