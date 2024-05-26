@@ -16,9 +16,9 @@ włącz pgadmin4 i utwórz bazę List_It
 
 winget install Chocolatey.Chocolatey
 
-choko install maven  //cmd with admin priviliges
+choco install maven  //cmd with admin priviliges
 
-choko install make
+choco install make
 
 cd .\List_It\backend\list_it\
 
@@ -46,7 +46,7 @@ przejdź do List_It a następnie do aplikacji użytkownika, administratora lub p
 
 cd aplikacja_uzytkownika 
 
-mpm install
+npm install
 
 npm install react-router-dom
 
