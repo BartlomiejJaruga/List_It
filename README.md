@@ -2,7 +2,7 @@
 
 java 21 https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html
 
-node v20.12.2 https://nodejs.org/en/blog/release/v20.12.1
+node v20.12.1 https://nodejs.org/en/blog/release/v20.12.1
 
 pgadmin4 https://www.pgadmin.org/download/pgadmin-4-windows/
 
