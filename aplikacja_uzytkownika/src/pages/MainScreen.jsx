@@ -11,7 +11,6 @@ import BugReportSection from '../components/BugReportSection';
 function MainScreen(){
     const [ sectionName, changeSection ] = useState("ToDo_List");
     const [ isHamburgerMenuOpen, changeHamburgerMenuState ] = useState(false);
-
     const toggleHamburgerMenu = () => {
         changeHamburgerMenuState(!isHamburgerMenuOpen);
     }
