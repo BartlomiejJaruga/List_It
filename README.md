@@ -33,7 +33,7 @@ spring.datasource.username=postgres
 spring.datasource.password=postgres
 
 
-kliknij prawy przycisk myszy na plik ShopApplication i kliknij Run 'ShopApplication'
+kliknij prawy przycisk myszy na plik ShopApplication i kliknij Run 'ListItApplication'
 
 
 **Frontend**
