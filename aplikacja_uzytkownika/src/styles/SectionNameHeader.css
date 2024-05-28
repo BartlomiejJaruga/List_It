@@ -7,4 +7,5 @@
     border-width: 0.3rem 0.3rem 0.3rem 0;
     border-color: var(--black);
     border-style: solid;
+    color: var(--white);
 }

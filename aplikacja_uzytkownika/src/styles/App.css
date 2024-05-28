@@ -1,6 +1,18 @@
 @import 'css_global_variables.css';
 
+@media (min-height: 1201px){
+  * {
+    font-size: 28px;
+  }
+}
+
 @media (max-height: 1200px){
+  * {
+    font-size: 24px;
+  }
+}
+
+@media (max-height: 1050px){
   * {
     font-size: 20px;
   }
@@ -9,6 +21,12 @@
 @media (max-height: 768px){
   * {
     font-size: 16px;
+  }
+}
+
+@media (max-height: 555px){
+  * {
+    font-size: 12px;
   }
 }
 

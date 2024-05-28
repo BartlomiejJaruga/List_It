@@ -50,6 +50,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    font-size: 16px;
     height: auto;
     width: auto;
     display: flex;
@@ -73,15 +74,25 @@
     }
 }
 
+@keyframes hamburger_menu_change_icon_size{
+    from{
+        font-size: 0.1rem;
+    }
+    to{
+        font-size: 2.4rem;
+    }
+}
+
 .hamburger_menu_options button{
     height: 10vh;
     width: 10vh;
-    font-size: 1rem;
+    font-size: 2.4rem;
     background-color: var(--grey);
     border-width: 0 0.3rem 0.3rem 0.3rem;
     border-style: solid;
     border-color: var(--black);
     color: var(--black);
+    animation: hamburger_menu_change_icon_size 0.2s ease-out;
 }
 
 .hamburger_menu_options button:first-of-type {

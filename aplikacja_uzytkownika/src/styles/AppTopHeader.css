@@ -1,6 +1,7 @@
 .app_header{
     height: 10vh;
     width: 100vw;
-    background-color: var(--lightblue);
+    background-color: var(--darkerblue);
+    box-shadow: 0 0.5rem 4rem 1rem var(--black);
     display: flex;
 }
