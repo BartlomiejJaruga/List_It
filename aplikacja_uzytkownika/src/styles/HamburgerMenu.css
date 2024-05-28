@@ -58,7 +58,7 @@
 }
 
 .hamburger_menu_options_visible {
-    animation: hamburger_menu_opening_animation 0.8s ease-out;
+    animation: hamburger_menu_opening_animation 0.5s ease-out;
 }
 
 .hamburger_menu_options_invisible {
