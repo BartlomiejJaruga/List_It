@@ -1,12 +1,14 @@
 # Potrzebne Technologie i aplikacje:
 
-[Java v21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html)
+[Java v21](https://www.oracle.com/java/technologies/javase/jdk21-archive-downloads.html) &nbsp;&nbsp; //dodać do PATH
 
-[NodeJS v20.12.1](https://nodejs.org/en/blog/release/v20.12.1)
+[NodeJS v20.12.1](https://nodejs.org/en/blog/release/v20.12.1) &nbsp;&nbsp; //dodać do PATH
 
 [Postgresql](https://www.postgresql.org/download/)
 
 [pgAdmin 4](https://www.pgadmin.org/download/pgadmin-4-windows/)
+
+<br>
 
 # Kolejność działań:
 
@@ -17,58 +19,72 @@
     - w pliku List_It\backend\list_it\src\main\resources\application.properties zmień na własne hasło i login w pgadmin
 
 ```
-spring.datasource.username=[Nazwa_użytkownika]
+spring.datasource.username=postgres
 
-spring.datasource.password=[Hasło]
+spring.datasource.password=postgres
 ```
+
+<br>
 
 2. cmd (uruchomione jako administrator)
 
 ```
-winget install Chocolatey.Chocolatey
-
-choco install maven
-
-cd [path\to\project]\List_It\backend\list_it\
-
-mvn clean
-
-mvn install
-
-mvn spring-boot:run
+winget install Chocolatey.Chocolatey -y
 ```
+
+> [!IMPORTANT]
+> Teraz zrestartuj cmd
+
+```
+choco install maven -y
+```
+
+<br>
 
 # Uruchamianie aplikacji:
 
+## Włączenie Back-endu:
+
+1. Przejdź do folderu [path\to\project]\List_It\backend\list_it\
+
+2. Uruchom plik `launch_backend.bat`
+
+> [!IMPORTANT]
+> Po uruchomieniu pliku `launch_backend.bat` w konsoli wykonają się kolejne polecenia. Gdy już nic więcej nie będzie sie wykonywało back-end jest gotowy i możemy przejść do włączenia front-endu (pozostaw tą konsole włączoną).
+
+<br>
+
+## Włączenie Front-endu:
+
+**Przy użyciu eksplolatora plików:**
+
+1. Przejdź do List_It, a następnie do folderu aplikacji użytkownika, administratora lub pracownika
+
+2. Uruchom plik `launch_app.bat`
+
+3. Wejdź w link `http://localhost:xxxx/` (x - cyfry portu)
+
+<br>
+
 **Przy użyciu cmd lub terminala w dowolnym Idle (np. Visual Studio Code):**
 
-1. Przejdź do List_It a następnie do aplikacji użytkownika, administratora lub pracownika w następujący sposób:
+1. Przejdź do List_It a następnie do folderu aplikacji użytkownika, administratora lub pracownika w następujący sposób:
 
 ```
-cd aplikacja_uzytkownika 
+cd aplikacja_pracownika
 ```
 
-2. Wykonaj następujące polecenia:
+2. Wykonaj następujące polecenie:
 ```
-npm install
-
-npm install react-router-dom
-
-yarn add react-router-dom
-
-npm install bootstrap react-bootstrap
-
-yarn add bootstrap react-bootstrap
-
-npm install @mui/material @emotion/react @emotion/styled
-
-npm start
+launch_app.bat
 ```
-3. Wejdź w link `localhost:xxxx` (x - cyfry portu)
+
+3. Wejdź w link `http://localhost:xxxx/` (x - cyfry portu)
+
+<br>
 
 # Błędy:
 
-- Jeśli pojawił się u ciebie błąd związany z yarn zainstaluj go po przez komendę
-```
-npm install --global yarn
-```
+- Jeśli pojawił się błąd związany z ***Java*** (np. *JDK wasn't found*) to upewnij się, że folder w którym zainstalowana została ***Java*** jest dodany do PATH (folder /bin)
+- Jeśli pojawił się błąd związany z poleceniem `npm` to upewnij się, że folder w którym zainstowany jest ***Node.js*** jest dodany do PATH (folder /bin)
+- Jeśli po kliknięciu przycisku 'Log in' na stronie logowania nic się nie dzieje to znaczy, że baza jest wyłączona albo back-end jest wyłączony. Upewnij się, że po włączeniu back-endu konsola pozostała otwarta oraz że pgAdmin jest włączony.
