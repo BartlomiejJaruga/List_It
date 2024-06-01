@@ -4,18 +4,17 @@ import "../styles/ToDoListSection.css";
 function ToDoListSection(){
 
     const [tasks, setTasks] = useState([
-        { name: 'Sample Task 1', important: false, completed: false },
-        { name: 'Sample Task 2', important: true, completed: false },
+        { name: 'Sample Task 1', important: false, completed: false, deleteChecked: false },
+        { name: 'Sample Task 2', important: true, completed: false, deleteChecked: false },
     ]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newTaskName, setNewTaskName] = useState('');
     const [isNewTaskImportant, setIsNewTaskImportant] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
-    const [tasksToDelete, setTasksToDelete] = useState([]);
 
     const addTask = () => {
         if (newTaskName.trim() !== '') {
-            setTasks([...tasks, { name: newTaskName, important: isNewTaskImportant, completed: false }]);
+            setTasks([...tasks, { name: newTaskName, important: isNewTaskImportant, completed: false, deleteChecked: false }]);
             setNewTaskName('');
             setIsNewTaskImportant(false);
             setIsModalOpen(false);
@@ -28,51 +27,58 @@ function ToDoListSection(){
         setTasks(newTasks);
     };
 
-    const toggleTaskToDelete = (index) => {
-        const newTasksToDelete = [...tasksToDelete];
-        if (newTasksToDelete.includes(index)) {
-            newTasksToDelete.splice(newTasksToDelete.indexOf(index), 1);
-        } else {
-            newTasksToDelete.push(index);
-        }
-        setTasksToDelete(newTasksToDelete);
+    const toggleTaskDeleteChecked = (index) => {
+        const newTasks = [...tasks];
+        newTasks[index].deleteChecked = !newTasks[index].deleteChecked;
+        setTasks(newTasks);
     };
 
     const deleteTasks = () => {
-        setTasks(tasks.filter((_, index) => !tasksToDelete.includes(index)));
-        setTasksToDelete([]);
+        setTasks(tasks.filter(task => !task.deleteChecked));
         setIsDeleting(false);
     };
 
-    return(
-        <div>
-            <ul>
+    const toggleDeleteMode = () => {
+        setIsDeleting(!isDeleting);
+        if (!isDeleting) {
+            // Reset delete checks when exiting delete mode
+            const newTasks = tasks.map(task => ({ ...task, deleteChecked: false }));
+            setTasks(newTasks);
+        }
+    };
+
+    return (
+        <div className="todo-container">
+            <ul className="todo-list">
                 {tasks.map((task, index) => (
-                    <li key={index}>
+                    <li key={index} className="todo-item">
                         <input
                             type="checkbox"
                             checked={task.completed}
                             onChange={() => toggleTaskCompletion(index)}
+                            className="task-checkbox"
                         />
-                        <span style={{ color: task.important ? 'red' : 'black', textDecoration: task.completed ? 'line-through' : 'none' }}>
+                        <input
+                            type="checkbox"
+                            checked={task.deleteChecked}
+                            onChange={() => toggleTaskDeleteChecked(index)}
+                            className="delete-checkbox"
+                            style={{ display: isDeleting ? 'inline' : 'none' }}
+                        />
+                        <span className="task-text" style={{ color: task.important ? 'red' : 'black', textDecoration: task.completed ? 'line-through' : 'none' }}>
               {task.name}
             </span>
-                        {isDeleting && (
-                            <input
-                                type="checkbox"
-                                checked={tasksToDelete.includes(index)}
-                                onChange={() => toggleTaskToDelete(index)}
-                            />
-                        )}
                     </li>
                 ))}
             </ul>
-            <button onClick={() => setIsModalOpen(true)}>Add Task</button>
-            {isDeleting ? (
-                <button onClick={deleteTasks}>Confirm Delete</button>
-            ) : (
-                <button onClick={() => setIsDeleting(true)}>Delete Task</button>
-            )}
+            <div className="button-container">
+                <button className="round-button" onClick={() => setIsModalOpen(true)}>+</button>
+                {isDeleting ? (
+                    <button className="round-button" onClick={deleteTasks}>✓</button>
+                ) : (
+                    <button className="round-button" onClick={toggleDeleteMode}>-</button>
+                )}
+            </div>
 
             {isModalOpen && (
                 <div className="modal">
