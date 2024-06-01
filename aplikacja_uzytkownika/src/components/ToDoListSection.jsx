@@ -14,10 +14,11 @@ function ToDoListSection(){
 
     const addTask = () => {
         if (newTaskName.trim() !== '') {
+            console.log("Added task.");
             setTasks([...tasks, { name: newTaskName, important: isNewTaskImportant, completed: false, deleteChecked: false }]);
+            setIsModalOpen(false);
             setNewTaskName('');
             setIsNewTaskImportant(false);
-            setIsModalOpen(false);
         }
     };
 
@@ -47,6 +48,11 @@ function ToDoListSection(){
         }
     };
 
+    const openModal = () => {
+        setIsModalOpen(true);
+        console.log("Adding...")
+    };
+
     return (
         <div className="todo-container">
             <ul className="todo-list">
@@ -55,24 +61,20 @@ function ToDoListSection(){
                         <input
                             type="checkbox"
                             checked={task.completed}
-                            onChange={() => toggleTaskCompletion(index)}
+                            onChange={isDeleting ? () => toggleTaskDeleteChecked(index) : () => toggleTaskCompletion(index)}
                             className="task-checkbox"
                         />
-                        <input
-                            type="checkbox"
-                            checked={task.deleteChecked}
-                            onChange={() => toggleTaskDeleteChecked(index)}
-                            className="delete-checkbox"
-                            style={{ display: isDeleting ? 'inline' : 'none' }}
-                        />
-                        <span className="task-text" style={{ color: task.important ? 'red' : 'black', textDecoration: task.completed ? 'line-through' : 'none' }}>
+                        <span className="task-text" style={{
+                            color: task.important ? 'red' : 'black',
+                            textDecoration: task.completed ? 'line-through' : 'none'
+                        }}>
               {task.name}
             </span>
                     </li>
                 ))}
             </ul>
             <div className="button-container">
-                <button className="round-button" onClick={() => setIsModalOpen(true)}>+</button>
+                <button className="round-button" onClick={openModal}>+</button>
                 {isDeleting ? (
                     <button className="round-button" onClick={deleteTasks}>✓</button>
                 ) : (
@@ -81,8 +83,8 @@ function ToDoListSection(){
             </div>
 
             {isModalOpen && (
-                <div className="modal">
-                    <div className="modal-content">
+                <div className="popup">
+                    <div className="popup-content">
                         <h2>Add New Task</h2>
                         <input
                             type="text"
@@ -91,8 +93,7 @@ function ToDoListSection(){
                             placeholder="Task Name"
                         />
                         <label>
-                            Important
-                            <input
+                            Important <input
                                 type="checkbox"
                                 checked={isNewTaskImportant}
                                 onChange={(e) => setIsNewTaskImportant(e.target.checked)}
