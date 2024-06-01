@@ -1,0 +1,69 @@
+.bug-report-section {
+    display: block;
+    margin: 30px;
+    color: var(--white);
+    text-align: center;
+}
+
+.section-label, .description-label {
+    color: var(--white);
+    font-size: 2rem;
+    width: 100%;
+    text-align: left;
+}
+
+.section-label {
+    display: block;
+}
+
+.section-label select {
+    background-color: var(--white);
+    color: var(--black);
+    width: 100%;
+}
+
+.description-label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.description-label textarea {
+    background-color: var(--white);
+    color: var(--black);
+    width: 100%;
+    height: 8rem;
+    font-size: 1.2rem;
+}
+
+.approval-label input[type="checkbox"] {
+    margin-right: 1rem;
+}
+
+.send-button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    background-color: var(--orange);
+    color: var(--white);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: transform 0.1s, background-color 0.3s;
+}
+
+.send-button:active {
+    transform: scale(0.95);
+    filter: brightness(90%);
+}
+
+.error-message {
+    color: var(--red);
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: var(--green);
+    font-size: 1rem;
+    margin-top: 10px;
+}
