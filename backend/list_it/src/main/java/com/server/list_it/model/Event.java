@@ -1,10 +1,11 @@
 package com.server.list_it.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,9 @@ public class Event {
 
     private String name;
 
-    private LocalDateTime date;
+    private LocalDate date;
+
+    private LocalTime time;
 
     @Enumerated(EnumType.STRING)
     private EventStatus status;
@@ -34,4 +37,9 @@ public class Event {
 
     @OneToMany(mappedBy = "event")
     private List<Comment> comments;
+
+    @ManyToOne
+    @JoinColumn(name = "creator_id", nullable = false)
+    @JsonBackReference
+    private User creator;
 }
