@@ -10,6 +10,7 @@ function Login() {
         email: "",
         password: "",
     });
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -23,31 +24,48 @@ function Login() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch("http://localhost:8081/login", {
+            const response = await fetch("http://localhost:8081/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(formData),
+                credentials: "include", // Ensure cookies are sent/received
             });
-            if (response.ok) {
-                const res = await response.json();
-                if (res.status) {
-                    console.log("User logged in successfully:", res);
-                    navigate("/homepage");
+
+            if (!response.ok) {
+                const contentType = response.headers.get("content-type");
+                let errorData = '';
+                if (contentType && contentType.includes("application/json")) {
+                    errorData = await response.json();
                 } else {
-                    console.error("Failed to log in:", res.message);
-                    // Display error message to user
+                    errorData = await response.text();
+                }
+                throw new Error(`HTTP status ${response.status}: ${errorData.message || errorData}`);
+            }
+
+            const res = await response.json();
+            console.log("Response JSON:", res); // Debugging line to see the response
+            if (res.status) {
+                console.log("User logged in successfully:", res);
+                sessionStorage.setItem("user", JSON.stringify(res.user));
+                if (res.user.type === "ADMIN") {
+                    navigate("/homepage"); // Redirect to admin dashboard if user is ADMIN
+                } else {
+                    setErrorMessage("You are not an admin.");
+                    navigate("/"); // Redirect to a standard user homepage otherwise
                 }
             } else {
-                console.error("Failed to log in:", response.statusText);
-                // Handle error
+                console.error("Failed to log in:", res.message);
+                setErrorMessage(res.message);
             }
         } catch (error) {
             console.error("Error logging in:", error);
-            // Handle connection error or other errors
+            setErrorMessage(error.message);
         }
     };
+
+
 
     return (
         <Container fluid>
@@ -62,7 +80,7 @@ function Login() {
                             <p className="text-white-50 mb-5">
                                 Please enter your login and password!
                             </p>
-
+                            {errorMessage && <p className="text-danger">{errorMessage}</p>}
                             <Form onSubmit={handleSubmit} className="w-100">
                                 <Form.Group className="mb-4" controlId="formEmail">
                                     <Form.Label className={`text-white ${formData.email ? "label-visible" : "label-fade"}`}>

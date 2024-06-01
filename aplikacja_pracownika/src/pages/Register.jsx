@@ -8,10 +8,11 @@ import "../styles/Register.css";
 function Register() {
     const [validated, setValidated] = useState(false);
     const [formData, setFormData] = useState({
-        fullName: "", // Changed from name to fullName
+        fullName: "",
         email: "",
         password: "",
         confirmPassword: "",
+        type: "WORKER", // Set default user type as WORKER
     });
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -24,6 +25,7 @@ function Register() {
         } else {
             event.preventDefault();
             try {
+                // Include the type in the POST request body
                 const response = await fetch("http://localhost:8081/api/register", {
                     method: "POST",
                     headers: {
@@ -53,6 +55,7 @@ function Register() {
             setValidated(true);
         }
     };
+
 
     const handleChange = (event) => {
         const { name, value } = event.target;

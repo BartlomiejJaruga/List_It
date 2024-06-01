@@ -30,7 +30,7 @@ function Login() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(formData),
-                credentials: "include",
+                credentials: "include", // Ensure cookies are sent/received
             });
 
             if (!response.ok) {
@@ -49,7 +49,12 @@ function Login() {
             if (res.status) {
                 console.log("User logged in successfully:", res);
                 sessionStorage.setItem("user", JSON.stringify(res.user));
-                navigate("/homepage");
+                if (res.user.type === "WORKER") {
+                    navigate("/homepage"); // Redirect to worker dashboard if user is WORKER
+                } else {
+                    setErrorMessage("You are not an worker.");
+                    navigate("/"); // Redirect to a standard user homepage otherwise
+                }
             } else {
                 console.error("Failed to log in:", res.message);
                 setErrorMessage(res.message);
@@ -59,6 +64,7 @@ function Login() {
             setErrorMessage(error.message);
         }
     };
+
 
 
     return (
