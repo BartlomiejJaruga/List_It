@@ -6,18 +6,26 @@ function BugReportSection(){
     const [section, setSection] = useState('todo');
     const [description, setDescription] = useState('');
     const [consent, setConsent] = useState(false);
+    const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleSubmit = () => {
-        if (description.trim() !== '') {
-            alert('Error reported successfully!');
+        if (section.trim() !== '' && description.trim() !== '' && consent) {
+            setError('');
+            setSuccessMessage('Zgłoszenie wysłane pomyślnie!');
             setSection('todo');
             setDescription('');
             setConsent(false);
+            setTimeout(() => {
+                setSuccessMessage('');
+            }, 2000);
         } else {
-            alert('Please enter a description of the error.');
+            setError('Wszystkie pola są wymagane.');
+            setTimeout(() => {
+                setError('');
+            }, 2000);
         }
     };
-
 
     return (
         <div className="bug-report-section">
@@ -48,6 +56,8 @@ function BugReportSection(){
             </label>
             <br/><br/>
             <button className="send-button" onClick={handleSubmit}>Wyślij zgłoszenie</button>
+            {error && <p className="error-message">{error}</p>}
+            {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
     );
 }

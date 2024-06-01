@@ -48,4 +48,22 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.5rem;
+    transition: transform 0.1s, background-color 0.3s;
+}
+
+.send-button:active {
+    transform: scale(0.95);
+    filter: brightness(90%);
+}
+
+.error-message {
+    color: var(--red);
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.success-message {
+    color: var(--green);
+    font-size: 1rem;
+    margin-top: 10px;
 }
