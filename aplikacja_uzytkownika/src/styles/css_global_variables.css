@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
 
-:root {
+body.light_mode {
     --gradient_background: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
     --lightblue: #6ECEF5;
     --darkerblue: #5765FF;
@@ -12,4 +12,20 @@
     --pureblack: #000000;
     --green: #71E45E;
     --red: #F84848;
+    --text-color: #2a2a2a;
+}
+
+body.dark_mode {
+    --gradient_background: linear-gradient(180deg, rgba(0,0,0, 0.60), rgba(0,0,0, 0.15));
+    --lightblue: #6ECEF5;
+    --darkerblue: #3742c4;
+    --orange: #bd790c;
+    --white: #F5F5F5;
+    --grey: #a5a5a5;
+    --purewhite: #FFFFFF;
+    --black: #3D3D3D;
+    --pureblack: #000000;
+    --green: #71E45E;
+    --red: #F84848;
+    --text-color: #aeaeae;
 }

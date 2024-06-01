@@ -1,0 +1,29 @@
+.button_switch_container {
+    height: 2.5rem;
+    width: 5rem;
+    background-color: var(--grey);
+    border-radius: 4rem;
+    border: 0.15rem solid var(--black);
+    display: flex;
+    align-items: center;
+    padding: 0.2rem;
+    box-shadow: 3px 4px 8px var(--black);
+}
+
+.button_switch_circle {
+    height: 2rem;
+    width: 2rem;
+    border-radius: 3rem;
+    border: 0.15rem solid var(--black);
+    transition: margin 0.6s ease-out;
+}
+
+.button_switch_circle_active {
+    background-color: var(--darkerblue);
+    margin: 0 0 0 2.3rem;
+}
+
+.button_switch_circle_not_active {
+    background-color: var(--orange);
+    margin: 0 2.3rem 0 0;
+}

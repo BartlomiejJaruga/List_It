@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles/App.css';
 import './assets/font-awesome-4.7.0/css/font-awesome.min.css';
 import Login from './pages/Login';
@@ -9,6 +9,26 @@ import MainScreen from "./pages/MainScreen";
 
 
 function App() {
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        const savedMode = localStorage.getItem('darkMode');
+        return savedMode ? JSON.parse(savedMode) : false;
+    });
+    
+    useEffect(() => {
+        if (isDarkMode) {
+            document.body.classList.add('dark_mode');
+            document.body.classList.remove('light_mode');
+        } else {
+            document.body.classList.add('light_mode');
+            document.body.classList.remove('dark_mode');
+        }
+        localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
+    }, [isDarkMode]);
+
+    const toggleModeHandler = () => {
+        setIsDarkMode(!isDarkMode);
+    };
+
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showRegister, setShowRegister] = useState(false);
 
@@ -21,7 +41,7 @@ function App() {
     };
 
     return (
-        <MainScreen />
+        <MainScreen isDarkMode = {isDarkMode} switchDarkLightMode = {toggleModeHandler}/>
         /*<Router>
             <div className="App">
                 <Routes>
