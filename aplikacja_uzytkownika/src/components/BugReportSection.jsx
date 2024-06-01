@@ -21,26 +21,24 @@ function BugReportSection(){
 
     return (
         <div className="bug-report-section">
-            <label>
-                Sekcja:
+            <label className={"section-label"}>
+                Sekcja:<br/>
                 <select value={section} onChange={(e) => setSection(e.target.value)}>
                     <option value="log_in">Logowanie</option>
                     <option value="to-do_list">To-Do List</option>
                     <option value="events">Wydarzenia</option>
                     <option value="menu_bar">Pasek Menu</option>
                 </select>
-            </label>
-            <br/>
-            <label>
-                Opis błędu:
+            </label><br/>
+            <label className={"description-label"}>
+                Opis błędu:<br/>
                 <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Wpisz opis napotkanego błędu"
                 />
             </label>
-            <br/>
-            <label>
+            <label className={"approval-label"}>
                 <input
                     type="checkbox"
                     checked={consent}
@@ -48,8 +46,8 @@ function BugReportSection(){
                 />
                 Zgoda na wysyłanie danych o urządzeniu na którym wystąpił błąd
             </label>
-            <br/>
-            <button onClick={handleSubmit}>Wyślij zgłoszenie</button>
+            <br/><br/>
+            <button className="send-button" onClick={handleSubmit}>Wyślij zgłoszenie</button>
         </div>
     );
 }
