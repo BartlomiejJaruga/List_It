@@ -4,8 +4,8 @@ import "../styles/ToDoListSection.css";
 function ToDoListSection(){
 
     const [tasks, setTasks] = useState([
-        { name: 'Sample Task 1', important: false, completed: false, deleteChecked: false },
-        { name: 'Sample Task 2', important: true, completed: false, deleteChecked: false },
+        { name: 'Odrobić matematyke', important: false, completed: false, deleteChecked: false },
+        { name: 'Pozmywać', important: true, completed: false, deleteChecked: false },
     ]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newTaskName, setNewTaskName] = useState('');
@@ -50,26 +50,25 @@ function ToDoListSection(){
 
     const openModal = () => {
         setIsModalOpen(true);
-        console.log("Adding...")
     };
 
     return (
         <div className="todo-container">
             <ul className="todo-list">
                 {tasks.map((task, index) => (
-                    <li key={index} className="todo-item">
-                        <input
-                            type="checkbox"
-                            checked={task.completed}
-                            onChange={isDeleting ? () => toggleTaskDeleteChecked(index) : () => toggleTaskCompletion(index)}
-                            className="task-checkbox"
-                        />
-                        <span className="task-text" style={{
-                            color: task.important ? 'red' : 'black',
-                            textDecoration: task.completed ? 'line-through' : 'none'
-                        }}>
-              {task.name}
-            </span>
+                    <li key={index} className={`todo-item ${task.important ? 'important' : ''} ${isDeleting && task.deleteChecked ? 'deleting' : ''}`}>
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={task.completed}
+                                onChange={isDeleting ? () => toggleTaskDeleteChecked(index) : () => toggleTaskCompletion(index)}
+                                className="task-checkbox"
+                            />
+                            <span className="task-text" style={{
+                                color: (isDeleting && task.deleteChecked) ? 'red' : (task.important ? 'orange' : 'white'),
+                                textDecoration: task.completed ? 'line-through' : 'none'
+                            }}>{task.name}</span>
+                        </label>
                     </li>
                 ))}
             </ul>
@@ -85,22 +84,22 @@ function ToDoListSection(){
             {isModalOpen && (
                 <div className="popup">
                     <div className="popup-content">
-                        <h2>Add New Task</h2>
+                        <h2>Dodaj nowe zadanie</h2>
                         <input
                             type="text"
                             value={newTaskName}
                             onChange={(e) => setNewTaskName(e.target.value)}
-                            placeholder="Task Name"
+                            placeholder="Nazwa zadania"
                         />
                         <label>
-                            Important <input
-                                type="checkbox"
-                                checked={isNewTaskImportant}
-                                onChange={(e) => setIsNewTaskImportant(e.target.checked)}
-                            />
+                            Oznacz jako ważne <input
+                            type="checkbox"
+                            checked={isNewTaskImportant}
+                            onChange={(e) => setIsNewTaskImportant(e.target.checked)}
+                        />
                         </label>
-                        <button onClick={addTask}>Add Task</button>
-                        <button onClick={() => setIsModalOpen(false)}>Cancel</button>
+                        <button onClick={addTask}>Dodaj</button>
+                        <button onClick={() => setIsModalOpen(false)}>Anuluj</button>
                     </div>
                 </div>
             )}
