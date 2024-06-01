@@ -73,11 +73,11 @@ function ToDoListSection(){
                 ))}
             </ul>
             <div className="button-container">
-                <button className="round-button" onClick={openModal}>+</button>
+                <button className="round-button" onClick={openModal}><i className="fa fa-plus" aria-hidden="true"></i></button>
                 {isDeleting ? (
-                    <button className="round-button" onClick={deleteTasks}>✓</button>
+                    <button className="round-button" onClick={deleteTasks}><i className="fa fa-check" aria-hidden="true"></i></button>
                 ) : (
-                    <button className="round-button" onClick={toggleDeleteMode}>-</button>
+                    <button className="round-button" onClick={toggleDeleteMode}><i className="fa fa-minus" aria-hidden="true"></i></button>
                 )}
             </div>
 
