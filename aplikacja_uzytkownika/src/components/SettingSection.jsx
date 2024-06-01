@@ -3,14 +3,16 @@ import '../styles/SettingsSection.css';
 import ButtonSwitch from './ButtonSwitch';
 import ChangePasswordModal from './ChangePasswordModal';
 import Notification from './Notification';
+import LogOutModal from './LogOutModal';
 
 function SettingsSection({ isDarkMode, switchDarkLightMode }){
-    const [ isNotificationsOn, setIsNotificationsOn ] = useState(false);
+    const [ isNotificationsOptionOn, setIsNotificationsOn ] = useState(false);
     const [ isChangingPasswordModalOn, setIsChangingPasswordModalOn ] = useState(false);
     const [ showNotification, setShowNotification ] = useState(false);
+    const [ isLogOutModalOn, setIsLogOutModalOn ] = useState(false);
 
     function setNotificationOnOffHandler(){
-        setIsNotificationsOn(!isNotificationsOn);
+        setIsNotificationsOn(!isNotificationsOptionOn);
     }
 
     function setChangingPasswordModalOnOffHandler(){
@@ -25,6 +27,10 @@ function SettingsSection({ isDarkMode, switchDarkLightMode }){
         setShowNotification(false);
     }
 
+    function setIsLogOutModalOnOffHandler(){
+        setIsLogOutModalOn(!isLogOutModalOn);
+    }
+
     return(
         <>
             <div className="settings_container">
@@ -35,11 +41,12 @@ function SettingsSection({ isDarkMode, switchDarkLightMode }){
                     </div>
                     <div className="notification_switch">
                         <h2>Powiadomienia o wydarzeniach</h2>
-                        <ButtonSwitch isActive={isNotificationsOn} actionHandler={setNotificationOnOffHandler}/>
+                        <ButtonSwitch isActive={isNotificationsOptionOn} actionHandler={setNotificationOnOffHandler}/>
                     </div>
                 </div>
                 <div className="log_out_and_change_password_container">
-                    <button className="settings_log_out_button">WYLOGUJ SIĘ</button>
+                    <button className="settings_log_out_button" 
+                            onClick={setIsLogOutModalOnOffHandler}>WYLOGUJ SIĘ</button>
                     <button className="settings_change_password_button" 
                             onClick={setChangingPasswordModalOnOffHandler}>
                         ZMIEŃ HASŁO
@@ -53,8 +60,11 @@ function SettingsSection({ isDarkMode, switchDarkLightMode }){
                           show={showNotification} 
                           onClose={setCloseNotificationHandler}
                           isDarkModeOn={isDarkMode} />
+            <LogOutModal show={isLogOutModalOn} closeModal={setIsLogOutModalOnOffHandler} />
+            { isLogOutModalOn
+            ? <div className="log_out_modal_overlay" onClick={setIsLogOutModalOnOffHandler}></div>
+            : null }
         </>
-        
     );
 }
 
