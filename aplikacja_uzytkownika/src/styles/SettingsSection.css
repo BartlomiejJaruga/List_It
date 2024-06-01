@@ -46,7 +46,7 @@
 .log_out_and_change_password_container > button {
     margin-bottom: 2rem;
     height: 4rem;
-    width: 20rem;
+    width: 17rem;
     border-radius: 0.5rem;
     box-shadow: 3px 5px 8px var(--pureblack);
     color: var(--text-color);

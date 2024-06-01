@@ -2,10 +2,12 @@ import { useState } from 'react';
 import '../styles/SettingsSection.css';
 import ButtonSwitch from './ButtonSwitch';
 import ChangePasswordModal from './ChangePasswordModal';
+import Notification from './Notification';
 
 function SettingsSection({ isDarkMode, switchDarkLightMode }){
     const [ isNotificationsOn, setIsNotificationsOn ] = useState(false);
     const [ isChangingPasswordModalOn, setIsChangingPasswordModalOn ] = useState(false);
+    const [ showNotification, setShowNotification ] = useState(false);
 
     function setNotificationOnOffHandler(){
         setIsNotificationsOn(!isNotificationsOn);
@@ -13,6 +15,14 @@ function SettingsSection({ isDarkMode, switchDarkLightMode }){
 
     function setChangingPasswordModalOnOffHandler(){
         setIsChangingPasswordModalOn(!isChangingPasswordModalOn);
+    }
+
+    function setShowNotificationHandler(){
+        setShowNotification(true);
+    }
+
+    function setCloseNotificationHandler(){
+        setShowNotification(false);
     }
 
     return(
@@ -36,7 +46,13 @@ function SettingsSection({ isDarkMode, switchDarkLightMode }){
                     </button>
                 </div>
             </div>
-            { isChangingPasswordModalOn ? <ChangePasswordModal /> : null }
+            { isChangingPasswordModalOn 
+            ? <ChangePasswordModal closeModal={setChangingPasswordModalOnOffHandler} showNotification={setShowNotificationHandler}/> 
+            : null }
+            <Notification message="Hasło zostało zmienione." 
+                          show={showNotification} 
+                          onClose={setCloseNotificationHandler}
+                          isDarkModeOn={isDarkMode} />
         </>
         
     );

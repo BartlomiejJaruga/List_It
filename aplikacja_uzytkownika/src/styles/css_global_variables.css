@@ -13,6 +13,9 @@ body.light_mode {
     --green: #71E45E;
     --red: #F84848;
     --text-color: #2a2a2a;
+    --text-color-accept-cancel-btn: #2a2a2a;
+    --modal-color: #F5F5F5;
+    --border-color: #3D3D3D;
 }
 
 body.dark_mode {
@@ -28,4 +31,7 @@ body.dark_mode {
     --green: #71E45E;
     --red: #F84848;
     --text-color: #aeaeae;
+    --text-color-accept-cancel-btn: #2a2a2a;
+    --modal-color: #3D3D3D;
+    --border-color: #bebebe;
 }
