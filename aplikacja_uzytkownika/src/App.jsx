@@ -1,9 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { useState } from 'react';
 import './styles/App.css';
+import './assets/font-awesome-4.7.0/css/font-awesome.min.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import logo from './logo.svg';
+import MainScreen from "./pages/MainScreen";
+
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -18,7 +21,8 @@ function App() {
     };
 
     return (
-        <Router>
+        <MainScreen />
+        /*<Router>
             <div className="App">
                 <Routes>
                     <Route
@@ -53,7 +57,7 @@ function App() {
                     <Route path="/login" element={<Login onLogin={handleLogin} onToggleRegister={toggleRegister} />} />
                 </Routes>
             </div>
-        </Router>
+        </Router>*/
     );
 }
 

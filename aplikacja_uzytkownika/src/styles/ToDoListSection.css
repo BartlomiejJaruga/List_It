@@ -1,0 +1,106 @@
+.todo-container {
+    margin-left: 30px;
+    margin-top: 40px;
+    margin-right: 20px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.todo-list {
+    list-style-type: none;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-checkbox, .delete-checkbox {
+    margin-right: 10px;
+}
+
+.task-text {
+    font-size: 24px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    top: 10px;
+    right: 10px;
+    margin-left: 10px;
+}
+
+.round-button {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50px;
+    background-color: var(--orange);
+    color: var(--white);
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.popup {
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(61, 61, 61, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+}
+
+.popup-content {
+    background: var(--darkerblue);
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    text-align: center;
+}
+
+.popup-content h2 {
+    margin-bottom: 20px;
+}
+
+.popup-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.popup-content label {
+    display: block;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+.popup-content button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    background-color: var(--green);
+    color: var(--white);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.popup-content button:last-child {
+    margin-right: 0;
+    background-color: var(--red);
+}

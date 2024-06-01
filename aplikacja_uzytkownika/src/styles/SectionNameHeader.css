@@ -1,0 +1,11 @@
+.section_name_header {
+    height: 10vh;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-width: 0.3rem 0.3rem 0.3rem 0;
+    border-color: var(--black);
+    border-style: solid;
+    color: var(--white);
+}
