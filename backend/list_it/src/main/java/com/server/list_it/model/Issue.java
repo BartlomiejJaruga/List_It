@@ -22,6 +22,7 @@ public class Issue {
 
     @Column(name = "issue_state")
     private IssueState issueState;
+
     private String description;
 
     @ManyToOne

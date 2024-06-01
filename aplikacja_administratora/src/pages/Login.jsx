@@ -108,7 +108,7 @@ function Login() {
                                     </a>
                                 </p>
                                 <div className="d-grid gap-2 col-6 mx-auto">
-                                    <button className="btn-login" type="submit">Login</button>
+                                    <button className="btn-login" type="submit">Log in</button>
                                 </div>
                             </Form>
                             <div style={{ textAlign: "center", marginTop: "1rem" }}>

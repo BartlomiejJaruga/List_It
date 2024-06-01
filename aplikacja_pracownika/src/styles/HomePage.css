@@ -242,7 +242,7 @@ button:hover {
 }
 
 .popup-content {
-    background: #6ecef5;
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
     padding: 20px;
     border-radius: 5px;
     width: 400px;

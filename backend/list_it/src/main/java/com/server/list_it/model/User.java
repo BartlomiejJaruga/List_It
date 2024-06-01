@@ -1,5 +1,6 @@
 package com.server.list_it.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,4 +38,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
+
+    @OneToMany(mappedBy = "creator")
+    @JsonManagedReference
+    private List<Event> events;
 }

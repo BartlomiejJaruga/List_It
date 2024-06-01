@@ -1,5 +1,6 @@
 package com.server.list_it.service;
 
+import com.server.list_it.dto.UserDto;
 import com.server.list_it.model.User;
 import com.server.list_it.repo.UserRepository;
 import jakarta.transaction.Transactional;
@@ -13,22 +14,36 @@ public class UserService {
     @Autowired
     private final UserRepository userRepository;
 
-    public boolean checkLogin(User user) {
-        user = userRepository.findByEmailAndPassword(user.getEmail(),user.getPassword());
-        return user != null;
-    }
-
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public User createUser(User user) {
+    public boolean checkLogin(User user) {
+        user = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
+        return user != null;
+    }
 
+    public User createUser(User user) {
         return userRepository.save(user);
     }
 
     public User authenticate(String email, String password) {
-        return userRepository.findByEmailAndPassword(email, password);
+        System.out.println("Authenticating user with email: " + email);
+        User user = userRepository.findByEmailAndPassword(email, password);
+        if (user == null) {
+            System.out.println("Authentication failed for email: " + email);
+        } else {
+            System.out.println("Authentication successful for email: " + email);
+        }
+        return user;
+    }
+
+    public User updateUser(Long userId, UserDto userDto) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            user.setDescription(userDto.getDescription());
+            return userRepository.save(user);
+        }
+        return null;
     }
 }
-

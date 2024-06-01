@@ -8,11 +8,12 @@ import "../styles/Register.css";
 function Register() {
     const [validated, setValidated] = useState(false);
     const [formData, setFormData] = useState({
-        name: "",
+        fullName: "", // Changed from name to fullName
         email: "",
         password: "",
         confirmPassword: "",
     });
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -23,22 +24,31 @@ function Register() {
         } else {
             event.preventDefault();
             try {
-                const response = await fetch("http://localhost:8081/register", {
+                const response = await fetch("http://localhost:8081/api/register", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify(formData),
                 });
+
+                const contentType = response.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await response.text();
+                    throw new Error(`Unexpected response: ${text}`);
+                }
+
+                const data = await response.json();
                 if (response.ok) {
-                    const userData = await response.json();
-                    console.log("User registered successfully:", userData);
+                    console.log("User registered successfully:", data);
                     navigate("/"); // Redirect to the default page
                 } else {
-                    console.error("Failed to register user:", response.statusText);
+                    console.error("Failed to register user:", data.message);
+                    setError(data.message);
                 }
             } catch (error) {
                 console.error("Error registering user:", error);
+                setError("An error occurred while registering the user.");
             }
             setValidated(true);
         }
@@ -69,6 +79,7 @@ function Register() {
                             <p className="text-white-50 mb-3">
                                 Please enter your details to create an account.
                             </p>
+                            {error && <p className="text-danger">{error}</p>}
                             <Form
                                 noValidate
                                 validated={validated}
@@ -76,17 +87,17 @@ function Register() {
                                 className="w-100"
                             >
                                 <Row className="mb-3">
-                                    <Form.Group as={Col} md="6" controlId="name">
+                                    <Form.Group as={Col} md="6" controlId="fullName"> {/* Changed from name to fullName */}
                                         <Form.Label
-                                            className={`text-white ${formData.name ? "label-visible" : "label-fade"}`}
+                                            className={`text-white ${formData.fullName ? "label-visible" : "label-fade"}`}
                                         >
                                             Full Name
                                         </Form.Label>
                                         <Form.Control
                                             type="text"
-                                            placeholder={!formData.name ? "Full Name" : ""}
-                                            name="name"
-                                            value={formData.name}
+                                            placeholder={!formData.fullName ? "Full Name" : ""}
+                                            name="fullName" // Changed from name to fullName
+                                            value={formData.fullName} // Changed from name to fullName
                                             onChange={handleChange}
                                             required
                                             size="lg"
