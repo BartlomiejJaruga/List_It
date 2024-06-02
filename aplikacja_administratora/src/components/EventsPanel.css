@@ -1,5 +1,29 @@
+/* events_panel.css */
 .events_panel {
     height: 100vh;
     width: 100%;
     background-color: var(--white);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.events_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.events_table_cell {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+.event_description {
+    max-width: 30%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.event_time {
+    width: 10%;
 }
