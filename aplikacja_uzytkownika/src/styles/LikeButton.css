@@ -1,0 +1,38 @@
+.like_containter {
+    display: flex;
+}
+
+.like_counter {
+    margin-right: 0.5rem;
+    font-size: 2rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.like_counter_red {
+    color: var(--red);
+}
+
+.like_button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 10px;
+    background-color: var(--grey);
+    border: none;
+    border-radius: 3rem;
+    transition: background-color 0.3s ease-out;
+}
+
+.like_button i {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.like_button_given {
+    background-color: var(--red);
+}

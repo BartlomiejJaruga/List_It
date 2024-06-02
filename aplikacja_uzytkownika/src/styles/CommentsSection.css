@@ -1,0 +1,31 @@
+.comments-section {
+    margin-top: 1rem;
+}
+
+.comment {
+    padding: 0.5rem;
+    background-color: var(--grey);
+    color: var(--pureblack);
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.comment h4 {
+    font-size: 1rem;
+}
+
+.new-comment-input {
+    padding: 0.5rem;
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    border: 0.1rem solid var(--orange);
+    background-color: var(--modal-color);
+    color: var(--text-color);
+}
+
+.add_new_comment_button {
+    width: 100%;
+    background-color: var(--orange);
+    border-radius: 0.5rem;
+}
