@@ -1,0 +1,31 @@
+.event-details {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.event_details_date_and_time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.event_details_date_and_time h5 {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.event_details_date_and_time h5:first-of-type {
+    color: var(--orange);
+}
+
+.event_datails_place {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event_datails_place h5:first-of-type {
+    color: var(--orange);
+}
