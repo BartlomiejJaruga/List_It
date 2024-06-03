@@ -19,9 +19,9 @@
     - w pliku List_It\backend\list_it\src\main\resources\application.properties zmień na własne hasło i login w pgadmin
 
 ```
-spring.datasource.username=postgres
+spring.datasource.username=[nazwa uzytkownika]
 
-spring.datasource.password=postgres
+spring.datasource.password=[hasło]
 ```
 
 <br>
