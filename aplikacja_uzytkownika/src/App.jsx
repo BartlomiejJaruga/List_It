@@ -1,11 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './styles/App.css';
 import './assets/font-awesome-4.7.0/css/font-awesome.min.css';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import logo from './logo.svg';
-import MainScreen from "./pages/MainScreen";
+import LoginPage from './pages/Login';
+import RegisterPage from './pages/Register';
+import HomePage from './pages/MainScreen';
 
 
 function App() {
@@ -13,7 +12,7 @@ function App() {
         const savedMode = localStorage.getItem('darkMode');
         return savedMode ? JSON.parse(savedMode) : false;
     });
-    
+
     useEffect(() => {
         if (isDarkMode) {
             document.body.classList.add('dark_mode');
@@ -25,59 +24,15 @@ function App() {
         localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
     }, [isDarkMode]);
 
-    const toggleModeHandler = () => {
-        setIsDarkMode(!isDarkMode);
-    };
-
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [showRegister, setShowRegister] = useState(false);
-
-    const handleLogin = () => {
-        setIsLoggedIn(true);
-    };
-
-    const toggleRegister = () => {
-        setShowRegister(!showRegister);
-    };
 
     return (
-        <MainScreen isDarkMode = {isDarkMode} switchDarkLightMode = {toggleModeHandler}/>
-        /*<Router>
-            <div className="App">
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            isLoggedIn ? (
-                                <div>
-                                    <header className="App-header">
-                                        <img src={logo} className="App-logo" alt="logo" />
-                                        <h1>Welcome to the Main Application</h1>
-                                        <p>Edit <code>src/App.jsx</code> and save to reload.</p>
-                                        <a
-                                            className="App-link"
-                                            href="https://reactjs.org"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            Learn React
-                                        </a>
-                                    </header>
-                                </div>
-                            ) : (
-                                showRegister ? (
-                                    <Register onToggleLogin={toggleRegister} />
-                                ) : (
-                                    <Login onLogin={handleLogin} onToggleRegister={toggleRegister} />
-                                )
-                            )
-                        }
-                    />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/login" element={<Login onLogin={handleLogin} onToggleRegister={toggleRegister} />} />
-                </Routes>
-            </div>
-        </Router>*/
+        <Router>
+            <Routes>
+                <Route path="/" element={<LoginPage />} />
+                <Route path="/homepage" element={<HomePage />} />
+                <Route path="/register" element={<RegisterPage />} />
+            </Routes>
+        </Router>
     );
 }
 
