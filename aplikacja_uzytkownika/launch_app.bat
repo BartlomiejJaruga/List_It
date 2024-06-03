@@ -1,0 +1,19 @@
+@echo off
+echo Starting installation...
+
+echo Installing dependencies using npm...
+call npm install
+
+echo Installing react-router-dom using npm...
+call npm install react-router-dom
+
+echo Installing bootstrap and react-bootstrap using npm...
+call npm install bootstrap react-bootstrap
+
+echo Installing Material-UI and Emotion packages using npm...
+call npm install @mui/material @emotion/react @emotion/styled
+
+echo Installation complete.
+echo Starting App on localhost...
+call npm start
+pause
