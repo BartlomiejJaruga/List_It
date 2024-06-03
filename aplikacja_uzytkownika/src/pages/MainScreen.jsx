@@ -8,7 +8,7 @@ import SettingsSection from '../components/SettingSection';
 import BugReportSection from '../components/BugReportSection';
 
 
-function MainScreen(){
+function MainScreen( { isDarkMode, switchDarkLightMode } ){
     const [ sectionName, changeSection ] = useState("ToDo_List");
     const [ isHamburgerMenuOpen, changeHamburgerMenuState ] = useState(false);
     const toggleHamburgerMenu = () => {
@@ -29,7 +29,7 @@ function MainScreen(){
                           changeHamburgerMenuState={toggleHamburgerMenu}/>
             {sectionName === "ToDo_List" ? <ToDoListSection/> 
             : sectionName === "Events" ? <EventsSection/> 
-            : sectionName === "Settings" ? <SettingsSection/>
+            : sectionName === "Settings" ? <SettingsSection isDarkMode = {isDarkMode} switchDarkLightMode = {switchDarkLightMode}/>
             : <BugReportSection/>}
         </div>
     );
