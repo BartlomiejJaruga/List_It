@@ -1,4 +1,3 @@
-// EventsTableRow component update
 import React from 'react';
 import './EventsTableRow.css';
 

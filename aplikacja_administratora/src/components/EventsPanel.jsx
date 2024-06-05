@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import EventsTableHeader from './EventsTableHeader';
 import EventsTableRow from './EventsTableRow';
+import './EventsPanel.css';
 
 function EventsPanel() {
   const [events, setEvents] = useState([]);

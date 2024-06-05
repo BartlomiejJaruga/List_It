@@ -1,11 +1,6 @@
 @import url(../components/css_global_variables.css);
 
-* {
-    font-family: 'Roboto Slab', serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    margin: 0;
-}
+
 
 .mainscreen {
     height: 100vh;
@@ -58,6 +53,10 @@ tr {
 
 tr:nth-child(odd) {
     background-color: var(--grey);
+}
+
+tr:nth-child(even) {
+    background-color: var(--white);
 }
 
 input[type="checkbox"] {

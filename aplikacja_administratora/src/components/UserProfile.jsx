@@ -4,7 +4,7 @@ import defaultPhoto from '../assets/default_user_picture.jpg';
 
 function UserProfile() {
   const [user, setUser] = useState({
-    name: 'Loading...', // default name while loading
+    name: 'Loading...',
     role: ''
   });
   const [photo, setPhoto] = useState(defaultPhoto);
@@ -17,7 +17,7 @@ function UserProfile() {
     try {
       const response = await fetch('http://localhost:8081/api/user', {
         method: 'GET',
-        credentials: 'include', // to ensure cookies are sent to handle session
+        credentials: 'include'
       });
 
       if (!response.ok) {
