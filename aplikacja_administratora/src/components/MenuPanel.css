@@ -1,6 +1,7 @@
 .menu_panel {
     min-width: 22rem;
+    min-height: 49rem;
     width: 22rem;
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-    height: 100vh;
+    position: relative;
 }

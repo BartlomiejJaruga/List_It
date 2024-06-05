@@ -27,7 +27,7 @@ function UserProfile() {
       const userData = await response.json();
       setUser({
         name: userData.fullName,
-        role: userData.type // assuming type is used for the role
+        role: userData.type
       });
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -54,12 +54,8 @@ function UserProfile() {
   return (
       <div>
         <div className="photo_and_buttons">
-          <img src={photo} alt="user photo" id="user_photo" />
-          <div className="user_profile_buttons">
-            <button onClick={() => document.getElementById('fileInput').click()}>Add Photo</button>
-            <button onClick={removePhoto}>Remove Photo</button>
-            <input type="file" id="fileInput" style={{ display: 'none' }} accept="image/*" onChange={loadPhoto} />
-          </div>
+          <img src={photo} alt="user photo" id="user_photo" onClick={() => document.getElementById('fileInput').click()}/>
+          <input type="file" id="fileInput" style={{ display: 'none' }} accept="image/*" onChange={loadPhoto} />
         </div>
         <div className="user_info">
           <p>{user.name}</p>
