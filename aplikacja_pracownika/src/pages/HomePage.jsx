@@ -307,8 +307,8 @@ function HomePage() {
                             onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
                         />
 
-                        <button onClick={() => setShowPopup(false)}>Wróć</button>
                         <button onClick={handleAddEvent}>Zatwierdź</button>
+                        <button onClick={() => setShowPopup(false)}>Wróć</button>
                     </div>
                 </div>
             )}
@@ -343,8 +343,8 @@ function HomePage() {
                             onChange={(e) => setCurrentEvent({ ...currentEvent, description: e.target.value })}
                         />
 
-                        <button onClick={() => setShowEditPopup(false)}>Wróć</button>
                         <button onClick={handleSaveEditEvent}>Zatwierdź</button>
+                        <button onClick={() => setShowEditPopup(false)}>Wróć</button>
                     </div>
                 </div>
             )}
@@ -360,8 +360,8 @@ function HomePage() {
                             onChange={(e) => setDescription(e.target.value)}
                         />
 
-                        <button onClick={() => setShowEditUserInfoPopup(false)}>Wróć</button>
                         <button onClick={handleSaveUserInfo}>Zatwierdź</button>
+                        <button onClick={() => setShowEditUserInfoPopup(false)}>Wróć</button>
                     </div>
                 </div>
             )}

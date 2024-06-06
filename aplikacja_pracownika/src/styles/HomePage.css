@@ -90,6 +90,7 @@ button:hover {
 
 .profile button {
     background-color: #f59c10;
+    box-shadow: 0.2rem 0.2rem #141414;
 }
 
 .profile button:last-child {
@@ -276,6 +277,14 @@ button:hover {
 
 .popup-content input {
     resize: none;
+}
+
+.popup-content button {
+    box-shadow: 0.2rem 0.2rem #141414;
+}
+
+.popup-content button:last-of-type {
+    background-color: #F84848;
 }
 
 .expanded-image {
