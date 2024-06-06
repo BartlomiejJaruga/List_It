@@ -2,6 +2,7 @@ package com.server.list_it.controller;
 
 import com.server.list_it.dto.UserDto;
 import com.server.list_it.model.ApiResponse;
+import com.server.list_it.model.ChangePasswordRequest;
 import com.server.list_it.model.User;
 import com.server.list_it.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -28,13 +29,19 @@ public class UserController {
     public ResponseEntity<ApiResponse> registerUser(@RequestBody User user) {
         ApiResponse response = new ApiResponse();
         try {
+            boolean emailExists = userService.emailExists(user.getEmail());
+            if (emailExists) {
+                response.setStatus(false);
+                response.setMessage("Email już istnieje");
+                return ResponseEntity.status(400).body(response);
+            }
             User savedUser = userService.createUser(user);
             response.setStatus(true);
-            response.setMessage("User registered successfully");
+            response.setMessage("Użytkownik zarejestrowany pomyślnie");
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             response.setStatus(false);
-            response.setMessage("Failed to register user: " + e.getMessage());
+            response.setMessage("Nie udało się zarejestrować użytkownika: " + e.getMessage());
             return ResponseEntity.status(500).body(response);
         }
     }
@@ -46,17 +53,17 @@ public class UserController {
             User user = userService.authenticate(loginRequest.getEmail(), loginRequest.getPassword());
             if (user != null) {
                 session.setAttribute("user", user);
-                response.setMessage("Login successful");
+                response.setMessage("Logowanie udane");
                 response.setStatus(true);
                 response.setUser(user);
                 return ResponseEntity.ok(response);
             } else {
-                response.setMessage("Invalid email or password");
+                response.setMessage("Nieprawidłowy email lub hasło");
                 response.setStatus(false);
                 return ResponseEntity.status(401).body(response);
             }
         } catch (Exception e) {
-            response.setMessage("An error occurred: " + e.getMessage());
+            response.setMessage("Wystąpił błąd: " + e.getMessage());
             response.setStatus(false);
             return ResponseEntity.status(500).body(response);
         }
@@ -66,7 +73,7 @@ public class UserController {
     public ResponseEntity<ApiResponse> logoutUser(HttpSession session) {
         session.invalidate();
         ApiResponse response = new ApiResponse();
-        response.setMessage("Logout successful");
+        response.setMessage("Wylogowanie udane");
         response.setStatus(true);
         return ResponseEntity.ok(response);
     }
@@ -88,6 +95,28 @@ public class UserController {
             return ResponseEntity.ok(updatedUser);
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/api/user/change-password")
+    public ResponseEntity<ApiResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest, HttpSession session) {
+        ApiResponse response = new ApiResponse();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            response.setStatus(false);
+            response.setMessage("Użytkownik nie jest zalogowany");
+            return ResponseEntity.status(401).body(response);
+        }
+
+        boolean isChanged = userService.changePassword(user.getId(), changePasswordRequest);
+        if (isChanged) {
+            response.setStatus(true);
+            response.setMessage("Hasło zmienione pomyślnie");
+            return ResponseEntity.ok(response);
+        } else {
+            response.setStatus(false);
+            response.setMessage("Nieprawidłowe obecne hasło");
+            return ResponseEntity.status(400).body(response);
         }
     }
 
