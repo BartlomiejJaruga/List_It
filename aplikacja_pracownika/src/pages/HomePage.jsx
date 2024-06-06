@@ -259,19 +259,19 @@ function HomePage() {
                                     />
                                 )}
                                 <p>{event.description}</p>
-                            </div>
-                            <div className="event-actions">
-                                <button onClick={() => { setCurrentEvent(event); setShowEditPopup(true); }}>Edytuj</button>
-                                <button onClick={() => {
-                                    if (window.confirm("Czy na pewno chcesz usunąć to wydarzenie?")) {
-                                        handleDeleteEvent(event.id);
-                                    }
-                                }}>Usuń</button>
+                                <div className="event-actions">
+                                    <button onClick={() => { setCurrentEvent(event); setShowEditPopup(true); }}>Edytuj</button>
+                                    <button onClick={() => {
+                                        if (window.confirm("Czy na pewno chcesz usunąć to wydarzenie?")) {
+                                            handleDeleteEvent(event.id);
+                                        }
+                                    }}>Usuń</button>
+                                </div>
                             </div>
                         </div>
                     ))
                 ) : (
-                    <p>Brak wydarzeń do wyświetlenia.</p>
+                    <p className="no_events_info">Brak wydarzeń do wyświetlenia.</p>
                 )}
             </div>
             {showPopup && (
@@ -307,8 +307,8 @@ function HomePage() {
                             onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
                         />
 
-                        <button onClick={() => setShowPopup(false)}>Wróć</button>
                         <button onClick={handleAddEvent}>Zatwierdź</button>
+                        <button onClick={() => setShowPopup(false)}>Wróć</button>
                     </div>
                 </div>
             )}
@@ -343,8 +343,8 @@ function HomePage() {
                             onChange={(e) => setCurrentEvent({ ...currentEvent, description: e.target.value })}
                         />
 
-                        <button onClick={() => setShowEditPopup(false)}>Wróć</button>
                         <button onClick={handleSaveEditEvent}>Zatwierdź</button>
+                        <button onClick={() => setShowEditPopup(false)}>Wróć</button>
                     </div>
                 </div>
             )}
@@ -360,8 +360,8 @@ function HomePage() {
                             onChange={(e) => setDescription(e.target.value)}
                         />
 
-                        <button onClick={() => setShowEditUserInfoPopup(false)}>Wróć</button>
                         <button onClick={handleSaveUserInfo}>Zatwierdź</button>
+                        <button onClick={() => setShowEditUserInfoPopup(false)}>Wróć</button>
                     </div>
                 </div>
             )}
