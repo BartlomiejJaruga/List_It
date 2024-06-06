@@ -1,47 +1,28 @@
 .photo_and_buttons {
   margin: 2rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 #user_photo {
-  border: 2px solid var(--black);
-  height: 7rem;
+  border: 0.2rem solid var(--pureblack);
+  border-radius: 10rem;
+  height: 10rem;
   width: auto;
-  max-width: 7rem;
-}
-
-.user_profile_buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-  
-.user_profile_buttons button {
-    width: 8.5rem;
-    border: 2px solid var(--black);
-    border-radius: 10rem;
-    height: 2.5rem;
-    cursor: pointer;
-}
-
-#user_profile_add_photo_btn {
-    background-color: var(--orange);
-}
-
-#user_profile_remove_photo_btn {
-    background-color: var(--red);
+  max-width: 10rem;
 }
 
 .user_info {
   margin: 0 2rem;
   background-color: var(--white);
-  border: 2px var(--black) solid;
-  border-radius: 15px;
+  border: 0.15rem var(--pureblack) solid;
+  box-shadow: 0.15rem 0.15rem 0.25rem var(--pureblack);
+  border-radius: 1rem;
   margin-bottom: 2rem;
   text-align: center;
 }
 
 .user_info p {
   margin: 0.5rem;
+  font-size: 1.3rem;
 }

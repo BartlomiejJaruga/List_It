@@ -1,0 +1,27 @@
+#events_table_ID {
+    min-width: 4vw;
+}
+
+#events_table_name {
+    min-width: 15vw;
+}
+
+#events_table_date {
+    min-width: 9vw;
+}
+
+#events_table_time {
+    min-width: 9vw;
+}
+
+#events_table_description {
+    min-width: 24.15vw;
+}
+
+#events_table_status {
+    min-width: 15vw;
+}
+
+#events_table_delete {
+    min-width: 5vw;
+}

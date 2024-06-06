@@ -1,11 +1,14 @@
 .logout-button {
-    align-self: flex-end;
-    margin: 2vh 2rem 0 2rem;
-    border: 2px solid var(--black);
-    border-radius: 10rem;
+    display: fixed;
+    position: absolute;
+    bottom: 3rem;
+    margin: 2rem 2rem 0 2rem;
+    border-radius: 0.5rem;
     background-color: var(--red);
-    font-size: 1.5rem;
+    border: none;
+    box-shadow: 0.25rem 0.25rem 0.25rem var(--pureblack);
+    font-size: 1.7rem;
     height: 4rem;
     width: 80%;
     color: var(--pureblack);
-  }
+}

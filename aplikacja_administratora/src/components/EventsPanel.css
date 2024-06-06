@@ -1,9 +1,7 @@
-/* events_panel.css */
 .events_panel {
     height: 100vh;
     width: 100%;
-    background-color: var(--white);
-    padding: 20px;
+    background-image: linear-gradient( rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
     box-sizing: border-box;
 }
 
