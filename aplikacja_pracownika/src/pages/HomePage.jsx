@@ -259,19 +259,19 @@ function HomePage() {
                                     />
                                 )}
                                 <p>{event.description}</p>
-                            </div>
-                            <div className="event-actions">
-                                <button onClick={() => { setCurrentEvent(event); setShowEditPopup(true); }}>Edytuj</button>
-                                <button onClick={() => {
-                                    if (window.confirm("Czy na pewno chcesz usunąć to wydarzenie?")) {
-                                        handleDeleteEvent(event.id);
-                                    }
-                                }}>Usuń</button>
+                                <div className="event-actions">
+                                    <button onClick={() => { setCurrentEvent(event); setShowEditPopup(true); }}>Edytuj</button>
+                                    <button onClick={() => {
+                                        if (window.confirm("Czy na pewno chcesz usunąć to wydarzenie?")) {
+                                            handleDeleteEvent(event.id);
+                                        }
+                                    }}>Usuń</button>
+                                </div>
                             </div>
                         </div>
                     ))
                 ) : (
-                    <p>Brak wydarzeń do wyświetlenia.</p>
+                    <p className="no_events_info">Brak wydarzeń do wyświetlenia.</p>
                 )}
             </div>
             {showPopup && (
