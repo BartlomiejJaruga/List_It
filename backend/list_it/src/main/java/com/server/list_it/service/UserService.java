@@ -1,6 +1,7 @@
 package com.server.list_it.service;
 
 import com.server.list_it.dto.UserDto;
+import com.server.list_it.model.ChangePasswordRequest;
 import com.server.list_it.model.User;
 import com.server.list_it.repo.UserRepository;
 import jakarta.transaction.Transactional;
@@ -18,6 +19,16 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public boolean changePassword(Long userId, ChangePasswordRequest changePasswordRequest) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null && user.getPassword().equals(changePasswordRequest.getCurrentPassword())) {
+            user.setPassword(changePasswordRequest.getNewPassword());
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
     public boolean checkLogin(User user) {
         user = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
         return user != null;
@@ -25,6 +36,10 @@ public class UserService {
 
     public User createUser(User user) {
         return userRepository.save(user);
+    }
+
+    public boolean emailExists(String email) {
+        return userRepository.findByEmail(email) != null;
     }
 
     public User authenticate(String email, String password) {
