@@ -35,6 +35,8 @@ public class Event {
 
     private Integer likes;
 
+    private String place;
+
     @OneToMany(mappedBy = "event")
     private List<Comment> comments;
 
