@@ -41,7 +41,8 @@ function Login() {
                 } else {
                     errorData = await response.text();
                 }
-                throw new Error(`HTTP status ${response.status}: ${errorData.message || errorData}`);
+                setErrorMessage(errorData.message || errorData);
+                return;
             }
 
             const res = await response.json();
@@ -50,9 +51,9 @@ function Login() {
                 console.log("User logged in successfully:", res);
                 sessionStorage.setItem("user", JSON.stringify(res.user));
                 if (res.user.type === "WORKER") {
-                    navigate("/homepage"); // Redirect to worker dashboard if user is WORKER
+                    navigate("/homepage"); // Redirect to student dashboard if user is STUDENT
                 } else {
-                    setErrorMessage("You are not an worker.");
+                    setErrorMessage("Nie jesteś pracownikiem.");
                     navigate("/"); // Redirect to a standard user homepage otherwise
                 }
             } else {
@@ -61,11 +62,9 @@ function Login() {
             }
         } catch (error) {
             console.error("Error logging in:", error);
-            setErrorMessage(error.message);
+            setErrorMessage("Wystąpił błąd podczas logowania. Spróbuj ponownie.");
         }
     };
-
-
 
     return (
         <Container fluid>
@@ -76,19 +75,19 @@ function Login() {
                         style={{ borderRadius: "1rem", maxWidth: "400px" }}
                     >
                         <Card.Body className="p-5 d-flex flex-column align-items-center mx-auto w-100">
-                            <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+                            <h2 className="fw-bold mb-2 text-uppercase">Logowanie</h2>
                             <p className="text-white-50 mb-5">
-                                Please enter your login and password!
+                                Wprowadź swoje dane logowania!
                             </p>
                             {errorMessage && <p className="text-danger">{errorMessage}</p>}
                             <Form onSubmit={handleSubmit} className="w-100">
                                 <Form.Group className="mb-4" controlId="formEmail">
                                     <Form.Label className={`text-white ${formData.email ? "label-visible" : "label-fade"}`}>
-                                        Email Address
+                                        Adres e-mail
                                     </Form.Label>
                                     <Form.Control
                                         type="email"
-                                        placeholder="Email Address"
+                                        placeholder="Adres e-mail"
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
@@ -97,17 +96,17 @@ function Login() {
                                         className="mdb-input"
                                     />
                                     <Form.Control.Feedback type="invalid">
-                                        Please enter a valid email address.
+                                        Proszę wprowadzić prawidłowy adres e-mail.
                                     </Form.Control.Feedback>
                                 </Form.Group>
 
                                 <Form.Group className="mb-4" controlId="formPassword">
                                     <Form.Label className={`text-white ${formData.password ? "label-visible" : "label-fade"}`}>
-                                        Password
+                                        Hasło
                                     </Form.Label>
                                     <Form.Control
                                         type="password"
-                                        placeholder="Password"
+                                        placeholder="Hasło"
                                         name="password"
                                         value={formData.password}
                                         onChange={handleChange}
@@ -116,24 +115,19 @@ function Login() {
                                         className="mdb-input"
                                     />
                                     <Form.Control.Feedback type="invalid">
-                                        Password is required.
+                                        Hasło jest wymagane.
                                     </Form.Control.Feedback>
                                 </Form.Group>
 
-                                <p className="small mb-3 pb-lg-2">
-                                    <a className="text-white-50" href="#!">
-                                        Forgot password?
-                                    </a>
-                                </p>
                                 <div className="d-grid gap-2 col-6 mx-auto">
-                                    <button className="btn-login" type="submit">Log in</button>
+                                    <button className="btn-login" type="submit">Zaloguj się</button>
                                 </div>
                             </Form>
                             <div style={{ textAlign: "center", marginTop: "1rem" }}>
                                 <p className="mb-0">
-                                    Don't have an account?{" "}
+                                    Nie masz konta?{" "}
                                     <Link to="/register" className="text-white-50 fw-bold">
-                                        Sign Up
+                                        Zarejestruj się
                                     </Link>
                                 </p>
                             </div>
