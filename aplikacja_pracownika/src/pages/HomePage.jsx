@@ -18,6 +18,7 @@ function HomePage() {
         name: '',
         date: new Date().toISOString().slice(0, 10),
         time: '',
+        place: '',
         description: ''
     });
     const [formError, setFormError] = useState('');
@@ -38,9 +39,9 @@ function HomePage() {
                     setDescription(user.description || '');
                     setCreatorId(user.id);
                     if (user.profilePicture) {
-                        setImage(user.profilePicture);
+                        fetchProfilePicture(user.id);
                     }
-                    fetchUserEvents(user.id); // Fetch events after setting user id
+                    await fetchUserEvents(user.id); // Fetch events after setting user id
                 } else {
                     console.error('Failed to fetch user data');
                     navigate('/');
@@ -48,6 +49,24 @@ function HomePage() {
             } catch (error) {
                 console.error('Error fetching user data:', error);
                 navigate('/');
+            }
+        };
+
+        const fetchProfilePicture = async (userId) => {
+            try {
+                const response = await fetch(`http://localhost:8081/api/user/${userId}/profile-picture`, {
+                    method: 'GET',
+                    credentials: 'include',
+                });
+                if (response.ok) {
+                    const imageBlob = await response.blob();
+                    const imageObjectURL = URL.createObjectURL(imageBlob);
+                    setImage(imageObjectURL);
+                } else {
+                    console.error('Failed to fetch profile picture');
+                }
+            } catch (error) {
+                console.error('Error fetching profile picture:', error);
             }
         };
 
@@ -59,8 +78,10 @@ function HomePage() {
                 });
                 if (response.ok) {
                     const userEvents = await response.json();
-                    console.log('Fetched events:', userEvents); // Log fetched events
-                    const eventsWithImage = userEvents.map(event => ({ ...event, image: dogsEvent }));
+                    const eventsWithImage = userEvents.map(event => ({
+                        ...event,
+                        image: dogsEvent // Use default event image
+                    }));
                     setEvents(eventsWithImage);
                 } else {
                     console.error('Failed to fetch events');
@@ -73,21 +94,72 @@ function HomePage() {
         fetchUserData();
     }, [navigate]);
 
-    const handleEventImageChange = (e) => {
+    const handleProfileImageChange = async (e) => {
         if (e.target.files && e.target.files[0]) {
-            setCurrentEvent({ ...currentEvent, image: URL.createObjectURL(e.target.files[0]) });
+            const file = e.target.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch(`http://localhost:8081/api/user/${creatorId}/profile-picture`, {
+                    method: 'PUT',
+                    body: formData,
+                    credentials: 'include',
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text(); // Get response text for debugging
+                    console.error('Error response text:', errorText); // Log the error text
+                    throw new Error('Failed to upload profile picture');
+                }
+
+                setImage(URL.createObjectURL(file));
+            } catch (error) {
+                console.error('Error uploading profile picture:', error);
+            }
         }
     };
 
-    const handleProfileImageChange = (e) => {
-        if (e.target.files && e.target.files[0]) {
-            setImage(URL.createObjectURL(e.target.files[0]));
+    const handleSaveEditEvent = async () => {
+        if (!currentEvent.name || !currentEvent.description || !currentEvent.place) {
+            setFormError('Pola nazwy wydarzenia, miejsca i opisu są wymagane!');
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8081/api/event/${currentEvent.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(currentEvent),
+                credentials: 'include',
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text(); // Get response text for debugging
+                console.error('Error response text:', errorText); // Log the error text
+                throw new Error('Failed to edit event');
+            }
+
+            const updatedEvent = await response.json();
+            console.log('Updated event:', updatedEvent); // Log the updated event
+            const updatedEvents = events.map(event =>
+                event.id === updatedEvent.id ? { ...updatedEvent, image: dogsEvent } : event
+            );
+            setEvents(updatedEvents);
+            setShowEditPopup(false);
+            setCurrentEvent(null);
+            setFormError('');
+        } catch (error) {
+            console.error('Error editing event:', error);
+            setFormError('Failed to edit event');
         }
     };
 
     const handleAddEvent = async () => {
-        if (!newEvent.name || !newEvent.description) {
-            setFormError('Pola nazwy wydarzenia i opisu są wymagane!');
+        if (!newEvent.name || !newEvent.description || !newEvent.place) {
+            setFormError('Pola nazwy wydarzenia, miejsca i opisu są wymagane!');
             return;
         }
 
@@ -97,7 +169,7 @@ function HomePage() {
             const response = await fetch('http://localhost:8081/api/event', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(eventToCreate),
                 credentials: 'include',
@@ -113,7 +185,7 @@ function HomePage() {
             console.log('Added event:', addedEvent); // Log the added event
             setEvents([...events, { ...addedEvent, image: dogsEvent }]);
             setShowPopup(false);
-            setNewEvent({ name: '', date: new Date().toISOString().slice(0, 10), time: '', description: '' });
+            setNewEvent({ name: '', date: new Date().toISOString().slice(0, 10), time: '', place: '', description: '' });
             setFormError('');
         } catch (error) {
             console.error('Error adding event:', error);
@@ -121,42 +193,6 @@ function HomePage() {
         }
     };
 
-    const handleSaveEditEvent = async () => {
-        if (!currentEvent.name || !currentEvent.description) {
-            setFormError('Pola nazwy wydarzenia i opisu są wymagane!');
-            return;
-        }
-
-        try {
-            const response = await fetch(`http://localhost:8081/api/event/${currentEvent.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(currentEvent),
-                credentials: 'include',
-            });
-
-            if (!response.ok) {
-                const errorText = await response.text(); // Get response text for debugging
-                console.error('Error response text:', errorText); // Log the error text
-                throw new Error('Failed to edit event');
-            }
-
-            const updatedEvent = await response.json();
-            console.log('Updated event:', updatedEvent); // Log the updated event
-            const updatedEvents = events.map(event =>
-                event.id === updatedEvent.id ? updatedEvent : event
-            );
-            setEvents(updatedEvents);
-            setShowEditPopup(false);
-            setCurrentEvent(null);
-            setFormError('');
-        } catch (error) {
-            console.error('Error editing event:', error);
-            setFormError('Failed to edit event');
-        }
-    };
 
     const handleSaveUserInfo = async () => {
         if (!description) {
@@ -245,6 +281,7 @@ function HomePage() {
                                     <tr>
                                         <td>Nazwa: {event.name}</td>
                                         <td>Data: {event.date} {event.time}</td>
+                                        <td>Miejsce: {event.place}</td> {/* Display place */}
                                         <td>Status: {event.status}</td>
                                         <td>Likes: {event.likes}</td>
                                     </tr>
@@ -255,7 +292,6 @@ function HomePage() {
                                         src={event.image}
                                         alt="Obrazek wydarzenia"
                                         className="event-img"
-                                        onClick={() => setSelectedImage(event.image)}
                                     />
                                 )}
                                 <p>{event.description}</p>
@@ -301,6 +337,13 @@ function HomePage() {
                             onChange={(e) => setNewEvent({ ...newEvent, time: e.target.value })}
                         />
 
+                        <label>Miejsce:</label>
+                        <input
+                            type="text"
+                            value={newEvent.place}
+                            onChange={(e) => setNewEvent({ ...newEvent, place: e.target.value })}
+                        />
+
                         <label>Dodatkowe informacje:</label>
                         <textarea
                             value={newEvent.description}
@@ -335,6 +378,13 @@ function HomePage() {
                             type="time"
                             value={currentEvent.time}
                             onChange={(e) => setCurrentEvent({ ...currentEvent, time: e.target.value })}
+                        />
+
+                        <label>Miejsce:</label>
+                        <input
+                            type="text"
+                            value={currentEvent.place}
+                            onChange={(e) => setCurrentEvent({ ...currentEvent, place: e.target.value })}
                         />
 
                         <label>Dodatkowe informacje:</label>
