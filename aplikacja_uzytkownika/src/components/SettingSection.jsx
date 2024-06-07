@@ -45,11 +45,13 @@ function SettingsSection({ isDarkMode, switchDarkLightMode }){
                     </div>
                 </div>
                 <div className="log_out_and_change_password_container">
-                    <button className="settings_log_out_button" 
-                            onClick={setIsLogOutModalOnOffHandler}>WYLOGUJ SIĘ</button>
                     <button className="settings_change_password_button" 
                             onClick={setChangingPasswordModalOnOffHandler}>
                         ZMIEŃ HASŁO
+                    </button>
+                    <button className="settings_log_out_button" 
+                            onClick={setIsLogOutModalOnOffHandler}>
+                        WYLOGUJ SIĘ
                     </button>
                 </div>
             </div>
