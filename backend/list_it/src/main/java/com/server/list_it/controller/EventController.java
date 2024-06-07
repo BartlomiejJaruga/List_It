@@ -1,5 +1,6 @@
 package com.server.list_it.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.server.list_it.dto.EventDto;
 import com.server.list_it.model.Event;
 import com.server.list_it.service.EventService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -15,6 +17,9 @@ public class EventController {
 
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody EventDto eventDto) {
@@ -36,16 +41,16 @@ public class EventController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<Event>> getAllEvents() {
-        List<Event> events = eventService.getAllEvents();
-        return ResponseEntity.ok(events);
-    }
-
     @GetMapping("/user/{creatorId}")
     public ResponseEntity<List<Event>> getEventsByCreatorId(@PathVariable Long creatorId) {
-        List<Event> events = eventService.getEventsByCreatorId(creatorId);
-        return ResponseEntity.ok(events);
+        try {
+            List<Event> events = eventService.getEventsByCreatorId(creatorId);
+            return ResponseEntity.ok(events);
+        } catch (Exception e) {
+            System.err.println("Error fetching events by creator ID: " + creatorId);
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @DeleteMapping("/{eventId}")
