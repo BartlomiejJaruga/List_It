@@ -42,7 +42,6 @@ function ToDoListSection(){
     const toggleDeleteMode = () => {
         setIsDeleting(!isDeleting);
         if (!isDeleting) {
-            // Reset delete checks when exiting delete mode
             const newTasks = tasks.map(task => ({ ...task, deleteChecked: false }));
             setTasks(newTasks);
         }
@@ -67,13 +66,13 @@ function ToDoListSection(){
                             />
                             <span className="checkbox-checkmark" />
                             <span className="task-text" style={{
-                                color: (isDeleting && task.deleteChecked) ? 'red' : (task.important ? 'orange' : 'white'),
+                                color: (isDeleting && task.deleteChecked) ? 'var(--red)' : (task.important ? 'var(--orange)' : 'var(--text-color)'),
                                 textDecoration: task.completed ? 'line-through' : 'none'
                             }}>{task.name}</span>
                         </label>
                     </li>
                 ))
-                : <p style={{fontSize: "1.6rem", color: "var(--white)", textAlign: "center"}}>Brak zadań!</p>}
+                : <p style={{fontSize: "1.6rem", color: "var(--text-color)", textAlign: "center"}}>Brak zadań!</p>}
             </ul>
             <div className="button-container">
                 <button className="round-button" onClick={openModal}><i className="fa fa-plus" aria-hidden="true"></i></button>
