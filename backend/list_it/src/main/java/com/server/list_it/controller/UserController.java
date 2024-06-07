@@ -7,8 +7,14 @@ import com.server.list_it.model.User;
 import com.server.list_it.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
@@ -35,6 +41,7 @@ public class UserController {
                 response.setMessage("Email już istnieje");
                 return ResponseEntity.status(400).body(response);
             }
+            user.setProfilePicture(null);  // Set profile picture to null on registration
             User savedUser = userService.createUser(user);
             response.setStatus(true);
             response.setMessage("Użytkownik zarejestrowany pomyślnie");
@@ -98,6 +105,27 @@ public class UserController {
         }
     }
 
+    @PutMapping("/api/user/{userId}/profile-picture")
+    public ResponseEntity<ApiResponse> updateProfilePicture(@PathVariable Long userId, @RequestParam("file") MultipartFile file) {
+        ApiResponse response = new ApiResponse();
+        try {
+            boolean isUpdated = userService.updateProfilePicture(userId, file);
+            if (isUpdated) {
+                response.setStatus(true);
+                response.setMessage("Zdjęcie profilowe zostało zaktualizowane");
+                return ResponseEntity.ok(response);
+            } else {
+                response.setStatus(false);
+                response.setMessage("Nie udało się zaktualizować zdjęcia profilowego");
+                return ResponseEntity.status(400).body(response);
+            }
+        } catch (IOException e) {
+            response.setStatus(false);
+            response.setMessage("Wystąpił błąd: " + e.getMessage());
+            return ResponseEntity.status(500).body(response);
+        }
+    }
+
     @PutMapping("/api/user/change-password")
     public ResponseEntity<ApiResponse> changePassword(@RequestBody ChangePasswordRequest changePasswordRequest, HttpSession session) {
         ApiResponse response = new ApiResponse();
@@ -120,4 +148,17 @@ public class UserController {
         }
     }
 
+    @GetMapping("/api/user/{id}/profile-picture")
+    public ResponseEntity<ByteArrayResource> getUserProfilePicture(@PathVariable Long id) {
+        byte[] image = userService.getProfilePicture(id);
+        if (image != null) {
+            ByteArrayResource resource = new ByteArrayResource(image);
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"profile-picture.png\"")
+                    .contentType(MediaType.IMAGE_PNG)
+                    .body(resource);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
