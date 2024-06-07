@@ -13,5 +13,6 @@ public class EventDto {
     private LocalTime time;
     private EventStatus status;
     private String description;
+    private String place;
     private Long creatorId;
 }
