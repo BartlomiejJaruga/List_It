@@ -46,13 +46,13 @@ function BugReportSection(){
                     placeholder="Wpisz opis napotkanego błędu"
                 />
             </label>
-            <label className={"approval-label"}>
+            <label className="approval-label">
                 <input
                     type="checkbox"
                     checked={consent}
                     onChange={(e) => setConsent(e.target.checked)}
                 />
-                Zgoda na wysyłanie danych o urządzeniu na którym wystąpił błąd
+                <span>Zgoda na wysyłanie danych o urządzeniu na którym wystąpił błąd</span>
             </label>
             <br/><br/>
             <button className="send-button" onClick={handleSubmit}>Wyślij zgłoszenie</button>

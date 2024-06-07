@@ -37,6 +37,12 @@
 
 .approval-label input[type="checkbox"] {
     margin-right: 1rem;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.approval-label span {
+    font-size: 1.1rem;
 }
 
 .send-button {

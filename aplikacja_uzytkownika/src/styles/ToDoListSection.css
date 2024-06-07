@@ -15,7 +15,11 @@
 .todo-item {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 0.8rem;
+}
+
+.task-checkbox {
+    display: none;
 }
 
 .task-checkbox, .delete-checkbox {
@@ -24,6 +28,45 @@
 
 .task-text {
     font-size: 24px;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    position: relative;
+    user-select: none;
+}
+
+.custom-checkbox .checkbox-checkmark {
+    position: relative;
+    height: 2rem;
+    width: 2rem;
+    background-color: var(--black);
+    border: 0.1rem solid var(--pureblack);
+    margin-right: 0.8rem;
+    border-radius: 50%;
+}
+
+.custom-checkbox input:checked + .checkbox-checkmark {
+    border: 0.1rem solid var(--white);
+    background-color: var(--green);
+}
+
+.custom-checkbox .checkbox-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 50%;
+    top: 50%;
+    width: 0.5rem;
+    height: 1rem;
+    border: solid var(--white);
+    border-width: 0 3px 3px 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.custom-checkbox input:checked + .checkbox-checkmark:after {
+    display: block;
 }
 
 .button-container {
@@ -72,23 +115,34 @@
 }
 
 .popup-content h2 {
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
 }
 
 .popup-content input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
     background-color: var(--white);
     color: var(--black);
+} 
+
+.popup-content input[type='checkbox'] {
+    display: block;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 0.5rem;
 }
 
 .popup-content label {
-    display: block;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
 }
 
+.is-important-task-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .popup-content button {
     padding: 10px 20px;
