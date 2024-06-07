@@ -76,7 +76,7 @@ function Login() {
                     >
                         <Card.Body className="p-5 d-flex flex-column align-items-center mx-auto w-100">
                             <h2 className="fw-bold mb-2 text-uppercase">Logowanie</h2>
-                            <p className="text-white-50 mb-5">
+                            <p className="text-white-50 mb-4" style={{ textAlign: "center", marginTop: "1rem"}}>
                                 Wprowadź swoje dane logowania!
                             </p>
                             {errorMessage && <p className="text-danger">{errorMessage}</p>}
@@ -119,11 +119,11 @@ function Login() {
                                     </Form.Control.Feedback>
                                 </Form.Group>
 
-                                <div className="d-grid gap-2 col-6 mx-auto">
+                                <div className="d-grid gap-2 col-9 mx-auto">
                                     <button className="btn-login" type="submit">Zaloguj się</button>
                                 </div>
                             </Form>
-                            <div style={{ textAlign: "center", marginTop: "1rem" }}>
+                            <div style={{ textAlign: "center", marginTop: "1rem", minWidth: "15rem" }}>
                                 <p className="mb-0">
                                     Nie masz konta?{" "}
                                     <Link to="/register" className="text-white-50 fw-bold">
