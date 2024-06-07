@@ -12,7 +12,7 @@ function Register() {
         email: "",
         password: "",
         confirmPassword: "",
-        type: "ADMIN", // Set default user type as ADMIN
+        type: "ADMIN", // Set default user type as STUDENT
     });
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -50,12 +50,11 @@ function Register() {
                 }
             } catch (error) {
                 console.error("Error registering user:", error);
-                setError("An error occurred while registering the user.");
+                setError("Wystąpił błąd podczas rejestracji użytkownika.");
             }
             setValidated(true);
         }
     };
-
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -78,9 +77,9 @@ function Register() {
                         style={{ borderRadius: "1rem", maxWidth: "900px" }}
                     >
                         <Card.Body className="p-5 d-flex flex-column align-items-center mx-auto w-100">
-                            <h2 className="fw-bold mb-2 text-uppercase">Register</h2>
+                            <h2 className="fw-bold mb-2 text-uppercase">Rejestracja</h2>
                             <p className="text-white-50 mb-3">
-                                Please enter your details to create an account.
+                                Wprowadź swoje dane, aby utworzyć konto.
                             </p>
                             {error && <p className="text-danger">{error}</p>}
                             <Form
@@ -94,11 +93,11 @@ function Register() {
                                         <Form.Label
                                             className={`text-white ${formData.fullName ? "label-visible" : "label-fade"}`}
                                         >
-                                            Full Name
+                                            Imię i nazwisko
                                         </Form.Label>
                                         <Form.Control
                                             type="text"
-                                            placeholder={!formData.fullName ? "Full Name" : ""}
+                                            placeholder={!formData.fullName ? "Imię i nazwisko" : ""}
                                             name="fullName" // Changed from name to fullName
                                             value={formData.fullName} // Changed from name to fullName
                                             onChange={handleChange}
@@ -106,18 +105,18 @@ function Register() {
                                             size="lg"
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            Full name is required.
+                                            Imię i nazwisko jest wymagane.
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                     <Form.Group as={Col} md="6" controlId="email">
                                         <Form.Label
                                             className={`text-white ${formData.email ? "label-visible" : "label-fade"}`}
                                         >
-                                            Email Address
+                                            Adres e-mail
                                         </Form.Label>
                                         <Form.Control
                                             type="email"
-                                            placeholder={!formData.email ? "Email Address" : ""}
+                                            placeholder={!formData.email ? "Adres e-mail" : ""}
                                             name="email"
                                             value={formData.email}
                                             onChange={handleChange}
@@ -125,7 +124,7 @@ function Register() {
                                             size="lg"
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            Please enter a valid email address.
+                                            Proszę wprowadzić prawidłowy adres e-mail.
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
@@ -134,11 +133,11 @@ function Register() {
                                         <Form.Label
                                             className={`text-white ${formData.password ? "label-visible" : "label-fade"}`}
                                         >
-                                            Password
+                                            Hasło
                                         </Form.Label>
                                         <Form.Control
                                             type="password"
-                                            placeholder={!formData.password ? "Password" : ""}
+                                            placeholder={!formData.password ? "Hasło" : ""}
                                             name="password"
                                             value={formData.password}
                                             onChange={handleChange}
@@ -146,18 +145,18 @@ function Register() {
                                             size="lg"
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            Password is required.
+                                            Hasło jest wymagane.
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                     <Form.Group as={Col} md="6" controlId="confirmPassword">
                                         <Form.Label
                                             className={`text-white ${formData.confirmPassword ? "label-visible" : "label-fade"}`}
                                         >
-                                            Confirm Password
+                                            Potwierdź hasło
                                         </Form.Label>
                                         <Form.Control
                                             type="password"
-                                            placeholder={!formData.confirmPassword ? "Confirm Password" : ""}
+                                            placeholder={!formData.confirmPassword ? "Potwierdź hasło" : ""}
                                             name="confirmPassword"
                                             value={formData.confirmPassword}
                                             onChange={handleChange}
@@ -165,7 +164,7 @@ function Register() {
                                             size="lg"
                                         />
                                         <Form.Control.Feedback type="invalid">
-                                            Passwords must match.
+                                            Hasła muszą się zgadzać.
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
@@ -179,15 +178,15 @@ function Register() {
                                             fontSize: "1rem",
                                         }}
                                     >
-                                        Register
+                                        Zarejestruj się
                                     </Button>
                                 </Row>
                             </Form>
                             <div className="text-center pt-3">
                                 <p className="mb-0">
-                                    Already have an account?{" "}
+                                    Masz już konto?{" "}
                                     <a href="#!" className="text-white-50 fw-bold" onClick={handleLoginClick}>
-                                        Login
+                                        Zaloguj się
                                     </a>
                                 </p>
                             </div>
