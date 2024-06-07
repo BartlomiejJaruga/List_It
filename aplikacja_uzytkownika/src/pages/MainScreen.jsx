@@ -30,7 +30,7 @@ function MainScreen( { isDarkMode, switchDarkLightMode } ){
             {sectionName === "ToDo_List" ? <ToDoListSection/> 
             : sectionName === "Events" ? <EventsSection/> 
             : sectionName === "Settings" ? <SettingsSection isDarkMode = {isDarkMode} switchDarkLightMode = {switchDarkLightMode}/>
-            : <BugReportSection/>}
+            : <BugReportSection isDarkMode={isDarkMode}/>}
         </div>
     );
 }

@@ -2,6 +2,7 @@
     position: fixed;
     height: 3rem;
     width: 20rem;
+    max-width: 90%;
     bottom: -200px;
     left: 50%;
     transform: translateX(-50%);
@@ -25,7 +26,7 @@
 .notification h4 {
     margin: 0;
     line-height: 1;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
 }
