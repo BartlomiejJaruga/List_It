@@ -42,7 +42,6 @@ function ToDoListSection(){
     const toggleDeleteMode = () => {
         setIsDeleting(!isDeleting);
         if (!isDeleting) {
-            // Reset delete checks when exiting delete mode
             const newTasks = tasks.map(task => ({ ...task, deleteChecked: false }));
             setTasks(newTasks);
         }
@@ -55,22 +54,25 @@ function ToDoListSection(){
     return (
         <div className="todo-container">
             <ul className="todo-list">
-                {tasks.map((task, index) => (
+                { tasks.length > 0 
+                ? tasks.map((task, index) => (
                     <li key={index} className={`todo-item ${task.important ? 'important' : ''} ${isDeleting && task.deleteChecked ? 'deleting' : ''}`}>
-                        <label>
+                        <label className="custom-checkbox">
                             <input
                                 type="checkbox"
                                 checked={task.completed}
                                 onChange={isDeleting ? () => toggleTaskDeleteChecked(index) : () => toggleTaskCompletion(index)}
                                 className="task-checkbox"
                             />
+                            <span className="checkbox-checkmark" />
                             <span className="task-text" style={{
-                                color: (isDeleting && task.deleteChecked) ? 'red' : (task.important ? 'orange' : 'white'),
+                                color: (isDeleting && task.deleteChecked) ? 'var(--red)' : (task.important ? 'var(--orange)' : 'var(--text-color)'),
                                 textDecoration: task.completed ? 'line-through' : 'none'
                             }}>{task.name}</span>
                         </label>
                     </li>
-                ))}
+                ))
+                : <p style={{fontSize: "1.6rem", color: "var(--text-color)", textAlign: "center"}}>Brak zadań!</p>}
             </ul>
             <div className="button-container">
                 <button className="round-button" onClick={openModal}><i className="fa fa-plus" aria-hidden="true"></i></button>
@@ -91,12 +93,13 @@ function ToDoListSection(){
                             onChange={(e) => setNewTaskName(e.target.value)}
                             placeholder="Nazwa zadania"
                         />
-                        <label>
-                            Oznacz jako ważne <input
-                            type="checkbox"
-                            checked={isNewTaskImportant}
-                            onChange={(e) => setIsNewTaskImportant(e.target.checked)}
-                        />
+                        <label className="is-important-task-container">
+                            <input
+                                type="checkbox"
+                                checked={isNewTaskImportant}
+                                onChange={(e) => setIsNewTaskImportant(e.target.checked)}
+                            />
+                            <span>Oznacz jako ważne</span>
                         </label>
                         <button onClick={addTask}>Dodaj</button>
                         <button onClick={() => setIsModalOpen(false)}>Anuluj</button>

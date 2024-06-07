@@ -168,7 +168,7 @@ function Register() {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                 </Row>
-                                <Row className="d-grid gap-2 col-6 mx-auto" style={{ marginTop: "2rem" }}>
+                                <Row className="d-flex justify-content-center" style={{ marginTop: "2rem" }}>
                                     <Button
                                         type="submit"
                                         sx={{
@@ -176,6 +176,8 @@ function Register() {
                                             borderRadius: "4px",
                                             border: "1px solid #FFFFFF",
                                             fontSize: "1rem",
+                                            minWidth: "12rem",
+                                            maxWidth: "12rem"
                                         }}
                                     >
                                         Zarejestruj się
@@ -183,7 +185,7 @@ function Register() {
                                 </Row>
                             </Form>
                             <div className="text-center pt-3">
-                                <p className="mb-0">
+                                <p className="mb-0" style={{minWidth: "15rem", maxWidth: "15rem"}}>
                                     Masz już konto?{" "}
                                     <a href="#!" className="text-white-50 fw-bold" onClick={handleLoginClick}>
                                         Zaloguj się

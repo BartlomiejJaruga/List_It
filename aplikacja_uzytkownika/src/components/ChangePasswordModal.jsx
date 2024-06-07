@@ -70,8 +70,8 @@ function ChangePasswordModal({ closeModal, showNotification }) {
                     <input type="password" placeholder="Confirm New Password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
                     {errorMessage && <p className="text-danger">{errorMessage}</p>}
                     <div className="change_password_buttons_container">
-                        <button type="button" onClick={closeModal}>CANCEL</button>
                         <button type="submit">CONFIRM</button>
+                        <button type="button" onClick={closeModal}>CANCEL</button>
                     </div>
                 </form>
             </div>

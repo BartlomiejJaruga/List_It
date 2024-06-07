@@ -24,12 +24,15 @@ function App() {
         localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
     }, [isDarkMode]);
 
+    const toggleDarkMode = () => {
+        setIsDarkMode(prevMode => !prevMode);
+    }
 
     return (
         <Router>
             <Routes>
                 <Route path="/" element={<LoginPage />} />
-                <Route path="/homepage" element={<HomePage />} />
+                <Route path="/homepage" element={<HomePage isDarkMode={isDarkMode} switchDarkLightMode={toggleDarkMode}/>} />
                 <Route path="/register" element={<RegisterPage />} />
             </Routes>
         </Router>

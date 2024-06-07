@@ -1,24 +1,22 @@
 import { useState } from 'react';
+import Notification from './Notification';
 import '../styles/BugReportSection.css';
 
-function BugReportSection(){
+function BugReportSection({ isDarkMode }){
 
-    const [section, setSection] = useState('todo');
+    const [section, setSection] = useState('to-do_list');
     const [description, setDescription] = useState('');
     const [consent, setConsent] = useState(false);
     const [error, setError] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
+    const [ showNotification, setShowNotification ] = useState(false);
 
     const handleSubmit = () => {
         if (section.trim() !== '' && description.trim() !== '' && consent) {
             setError('');
-            setSuccessMessage('Zgłoszenie wysłane pomyślnie!');
-            setSection('todo');
+            setShowNotification(true);
+            setSection('to-do_list');
             setDescription('');
             setConsent(false);
-            setTimeout(() => {
-                setSuccessMessage('');
-            }, 2000);
         } else {
             setError('Wszystkie pola są wymagane.');
             setTimeout(() => {
@@ -26,6 +24,10 @@ function BugReportSection(){
             }, 2000);
         }
     };
+
+    function setCloseNotificationHandler(){
+        setShowNotification(false);
+    }
 
     return (
         <div className="bug-report-section">
@@ -43,21 +45,24 @@ function BugReportSection(){
                 <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Wpisz opis napotkanego błędu"
+                    placeholder="Opis napotkanego błędu"
                 />
             </label>
-            <label className={"approval-label"}>
+            <label className="approval-label">
                 <input
                     type="checkbox"
                     checked={consent}
                     onChange={(e) => setConsent(e.target.checked)}
                 />
-                Zgoda na wysyłanie danych o urządzeniu na którym wystąpił błąd
+                <span>Zgoda na wysyłanie danych o urządzeniu na którym wystąpił błąd</span>
             </label>
             <br/><br/>
             <button className="send-button" onClick={handleSubmit}>Wyślij zgłoszenie</button>
             {error && <p className="error-message">{error}</p>}
-            {successMessage && <p className="success-message">{successMessage}</p>}
+            <Notification message="Zgłoszenie zostało wysłane." 
+                                             show={showNotification} 
+                                             onClose={setCloseNotificationHandler}
+                                             isDarkModeOn={isDarkMode} />
         </div>
     );
 }
