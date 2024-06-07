@@ -7,6 +7,9 @@ import com.server.list_it.repo.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Service
 @Transactional
@@ -60,5 +63,20 @@ public class UserService {
             return userRepository.save(user);
         }
         return null;
+    }
+
+    public boolean updateProfilePicture(Long userId, MultipartFile file) throws IOException {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            user.setProfilePicture(file.getBytes());
+            userRepository.save(user);
+            return true;
+        }
+        return false;
+    }
+
+    public byte[] getProfilePicture(Long userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        return user != null ? user.getProfilePicture() : null;
     }
 }
