@@ -6,15 +6,19 @@ import com.server.list_it.model.EventStatus;
 import com.server.list_it.model.User;
 import com.server.list_it.repo.EventRepository;
 import com.server.list_it.repo.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class EventService {
-
     @Autowired
     private EventRepository eventRepository;
 
@@ -30,6 +34,7 @@ public class EventService {
                     .time(eventDto.getTime())
                     .status(EventStatus.NEW)
                     .description(eventDto.getDescription())
+                    .place(eventDto.getPlace())
                     .likes(0)
                     .creator(userOptional.get())
                     .build();
@@ -46,6 +51,7 @@ public class EventService {
             event.setDate(eventDto.getDate());
             event.setTime(eventDto.getTime());
             event.setDescription(eventDto.getDescription());
+            event.setPlace(eventDto.getPlace());
             return eventRepository.save(event);
         }
         return null;
