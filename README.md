@@ -14,12 +14,12 @@
 
 1. pgAdmin 4
 
-    - włącz pgAdmin 4 i utwórz bazę List_It
+    - włącz pgAdmin 4 i utwórz bazę `List_It`
 
-    - w pliku List_It\backend\list_it\src\main\resources\application.properties zmień na własne hasło i login w pgadmin
+    - w pliku `List_It\backend\list_it\src\main\resources\application.properties` zmień na własne hasło i login utworzone podczas instalacji pgAdmin (użytkownik postgres) 
 
 ```
-spring.datasource.username=[nazwa uzytkownika]
+spring.datasource.username=postgres
 
 spring.datasource.password=[hasło]
 ```
@@ -29,7 +29,7 @@ spring.datasource.password=[hasło]
 2. cmd (uruchomione jako administrator)
 
 ```
-winget install Chocolatey.Chocolatey -y
+winget install Chocolatey.Chocolatey
 ```
 
 > [!IMPORTANT]
