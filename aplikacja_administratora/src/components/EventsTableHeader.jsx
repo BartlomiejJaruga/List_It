@@ -12,6 +12,7 @@ function EventsTableHeader({ onSort }) {
             <th id="events_table_name" onClick={() => handleSort('name')}>Nazwa</th>
             <th id="events_table_date" onClick={() => handleSort('date')}>Data</th>
             <th id="events_table_time" onClick={() => handleSort('time')}>Godzina</th>
+            <th id="events_table_place" onClick={() => handleSort('place')}>Miejsce</th>
             <th id="events_table_description" onClick={() => handleSort('description')}>Opis</th>
             <th id="events_table_status" onClick={() => handleSort('status')}>Status</th>
             <th id="events_table_delete">Usuń</th>

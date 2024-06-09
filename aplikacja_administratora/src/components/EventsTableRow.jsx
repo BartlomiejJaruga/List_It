@@ -13,6 +13,7 @@ function EventsTableRow({ event, onCheckboxChange, onStatusChange }) {
             <td>{event.name}</td>
             <td>{event.date}</td>
             <td>{event.time}</td>
+            <td>{event.place}</td>
             <td>{event.description}</td>
             <td>
                 <select className='status_cell' value={event.status} onChange={handleStatusChange}>

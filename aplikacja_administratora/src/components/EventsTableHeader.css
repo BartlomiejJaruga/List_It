@@ -14,8 +14,12 @@
     min-width: 9vw;
 }
 
+#events_table_place {
+    min-width: 9vw;
+}
+
 #events_table_description {
-    min-width: 24.15vw;
+    min-width: 15.15vw;
 }
 
 #events_table_status {
