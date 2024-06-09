@@ -41,6 +41,18 @@ public class EventController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<List<Event>> getAllEvents() {
+        try {
+            List<Event> events = eventService.getAllEvents();
+            return ResponseEntity.ok(events);
+        } catch (Exception e) {
+            System.err.println("Error fetching all events");
+            e.printStackTrace();
+            return ResponseEntity.status(500).build();
+        }
+    }
+
     @GetMapping("/user/{creatorId}")
     public ResponseEntity<List<Event>> getEventsByCreatorId(@PathVariable Long creatorId) {
         try {

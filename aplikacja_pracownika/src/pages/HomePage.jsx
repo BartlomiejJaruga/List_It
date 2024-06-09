@@ -281,7 +281,7 @@ function HomePage() {
                                     <tr>
                                         <td>Nazwa: {event.name}</td>
                                         <td>Data: {event.date} {event.time}</td>
-                                        <td>Miejsce: {event.place}</td> {/* Display place */}
+                                        <td>Miejsce: {event.place}</td>
                                         <td>Status: {event.status}</td>
                                         <td>Likes: {event.likes}</td>
                                     </tr>

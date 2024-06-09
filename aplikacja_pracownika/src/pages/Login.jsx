@@ -119,7 +119,7 @@ function Login() {
                                     </Form.Control.Feedback>
                                 </Form.Group>
 
-                                <div className="d-grid gap-2 col-6 mx-auto">
+                                <div className="d-flex justify-content-center">
                                     <button className="btn-login" type="submit">Zaloguj się</button>
                                 </div>
                             </Form>

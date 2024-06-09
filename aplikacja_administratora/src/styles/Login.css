@@ -9,16 +9,19 @@ body {
     background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
 }
 .btn-login {
-    padding: 0.75rem 1.5rem;  /* Duże paddingi dla lepszej widoczności */
-    font-size: 1.25rem;       /* Większa czcionka */
-    color: #fff;              /* Biały tekst */
-    background-color: #1266F1; /* Niebieskie tło */
-    border: none;             /* Brak obramowania */
-    border-radius: 0.5rem;    /* Zaokrąglone rogi */
-    transition: background-color 0.3s; /* Animacja tła przy hover */
+    min-width: 10rem;
+    max-width: 10rem;
+    margin: 1rem 0;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    color: #fff;
+    background-color: #1266F1;
+    border: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
 }
 
 .btn-login:hover {
-    background-color: #0d6efd; /* Ciemniejszy niebieski przy hover */
+    background-color: #0d6efd;
 }
 
