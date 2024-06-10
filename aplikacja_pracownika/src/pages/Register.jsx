@@ -19,13 +19,12 @@ function Register() {
 
     const handleSubmit = async (event) => {
         const form = event.currentTarget;
-        if (!form.checkValidity()) {
-            event.preventDefault();
+        event.preventDefault();
+        if (form.checkValidity() === false) {
             event.stopPropagation();
+            setError("Proszę wypełnić wszystkie wymagane pola.");
         } else {
-            event.preventDefault();
             try {
-                // Include the type in the POST request body
                 const response = await fetch("http://localhost:8081/api/register", {
                     method: "POST",
                     headers: {
@@ -52,8 +51,8 @@ function Register() {
                 console.error("Error registering user:", error);
                 setError("Wystąpił błąd podczas rejestracji użytkownika.");
             }
-            setValidated(true);
         }
+        setValidated(true);
     };
 
     const handleChange = (event) => {
@@ -62,6 +61,7 @@ function Register() {
             ...formData,
             [name]: value,
         });
+        setError(null); // Clear any existing errors when user starts typing
     };
 
     const handleLoginClick = () => {
@@ -89,17 +89,15 @@ function Register() {
                                 className="w-100"
                             >
                                 <Row className="mb-3">
-                                    <Form.Group as={Col} md="6" controlId="fullName"> {/* Changed from name to fullName */}
-                                        <Form.Label
-                                            className={`text-white ${formData.fullName ? "label-visible" : "label-fade"}`}
-                                        >
+                                    <Form.Group as={Col} md="6" controlId="fullName">
+                                        <Form.Label className={`text-white ${formData.fullName ? "label-visible" : "label-fade"}`}>
                                             Imię i nazwisko
                                         </Form.Label>
                                         <Form.Control
                                             type="text"
                                             placeholder={!formData.fullName ? "Imię i nazwisko" : ""}
-                                            name="fullName" // Changed from name to fullName
-                                            value={formData.fullName} // Changed from name to fullName
+                                            name="fullName"
+                                            value={formData.fullName}
                                             onChange={handleChange}
                                             required
                                             size="lg"
@@ -109,9 +107,7 @@ function Register() {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                     <Form.Group as={Col} md="6" controlId="email">
-                                        <Form.Label
-                                            className={`text-white ${formData.email ? "label-visible" : "label-fade"}`}
-                                        >
+                                        <Form.Label className={`text-white ${formData.email ? "label-visible" : "label-fade"}`}>
                                             Adres e-mail
                                         </Form.Label>
                                         <Form.Control
@@ -130,9 +126,7 @@ function Register() {
                                 </Row>
                                 <Row className="mb-3">
                                     <Form.Group as={Col} md="6" controlId="password">
-                                        <Form.Label
-                                            className={`text-white ${formData.password ? "label-visible" : "label-fade"}`}
-                                        >
+                                        <Form.Label className={`text-white ${formData.password ? "label-visible" : "label-fade"}`}>
                                             Hasło
                                         </Form.Label>
                                         <Form.Control
@@ -149,9 +143,7 @@ function Register() {
                                         </Form.Control.Feedback>
                                     </Form.Group>
                                     <Form.Group as={Col} md="6" controlId="confirmPassword">
-                                        <Form.Label
-                                            className={`text-white ${formData.confirmPassword ? "label-visible" : "label-fade"}`}
-                                        >
+                                        <Form.Label className={`text-white ${formData.confirmPassword ? "label-visible" : "label-fade"}`}>
                                             Potwierdź hasło
                                         </Form.Label>
                                         <Form.Control
