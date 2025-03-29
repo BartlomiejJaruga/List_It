@@ -9,42 +9,42 @@ Dzięki systemowi moderacji administrator dba o jakość publikowanych treści i
 
 # Funkcjonalności pracowników uczelni:
 1. Pracownicy z założenia logują się, rejestrują się oraz korzystają tylko z komputerowej wersji strony internetowej: <br><br>
-    <img src="screenshots/logowanie.PNG" height="500">
-    <img src="screenshots/rejestracja.PNG" height="600">
+    <img src="screenshots/logowanie.PNG">
+    <img src="screenshots/rejestracja.PNG">
     <img src="screenshots/brak_wypelnienia_pol_rejestracji.PNG" height="500">
-   <img src="screenshots/ekran_pracownika_start.PNG" height="500"><br><br>
+   <img src="screenshots/ekran_pracownika_start.PNG"><br><br>
 2. Zmiana opisu konta: <br><br>
    <img src="screenshots/ekran_pracownika_edytuj_informacje.PNG" height="500"><br><br>
 3. Zmiana zdjęcia profilowego (tak samo jak u administratora po kliknieciu w zdjęcie profilowe): <br><br>
    <img src="screenshots/ekran_pracownika_zdjecie.PNG" height="500"><br><br>
 4. Dodawanie nowych wydarzeń, które odbędą się na uczelni: <br><br>
-   <img src="screenshots/ekran_pracownika_dodaj_nowe_wydarzenie.PNG" height="500">
+   <img src="screenshots/ekran_pracownika_dodaj_nowe_wydarzenie.PNG">
    <img src="screenshots/ekran_pracownika_dodaj_glaskanie_kotkow.PNG" height="500">
-   <img src="screenshots/ekran_pracownika_glaskanie_kotkow_dodane.PNG" height="500"><br><br>
+   <img src="screenshots/ekran_pracownika_glaskanie_kotkow_dodane.PNG"><br><br>
 5. Edycja i aktualizacja informacji o wydarzeniach: <br><br>
-   <img src="screenshots/ekran_pracownika_edytuj_glaskanie_kotkow.PNG" height="500"><br><br>
+   <img src="screenshots/ekran_pracownika_edytuj_glaskanie_kotkow.PNG"><br><br>
 6. Usuwanie dodanych wydarzeń (wraz z potwierdzeniem): <br><br>
    <img src="screenshots/ekran_pracownika_usuwanie_wydarzenia.PNG"><br><br>
 7. Wygodne przeglądanie dodanych wydarzeń: <br><br>
-   <img src="screenshots/ekran_pracownika_wiecej_wydarzen.PNG" height="500"><br><br>
+   <img src="screenshots/ekran_pracownika_wiecej_wydarzen.PNG"><br><br>
 
 
 # Funkcjonalności informatyka (administratora):
 1. Administrator z założenia loguje się oraz korzysta tylko z komputerowej wersji strony internetowej: <br><br>
-    <img src="screenshots/logowanie.PNG" height="500"> <br><br>
+    <img src="screenshots/logowanie.PNG"> <br><br>
 2. Przeglądanie, sortowanie i zarządzanie użytkownikami: <br><br>
-    <img src="screenshots/ekran_admin_uzytkownicy.PNG" height="500"> <br><br>
+    <img src="screenshots/ekran_admin_uzytkownicy.PNG"> <br><br>
     Dla przykładu sortowanie rosnąco i malejąco po kolumnie *Indeks*: <br><br>
 <img src="screenshots/ekran_admin_uzytkownicy_sortowanie_indeks.PNG" height="500">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="screenshots/ekran_admin_uzytkownicy_sortowanie_indeks_malejaco.PNG" height="500"><br><br>
 3. Przeglądanie, sortowanie i zarządanie  wydarzeniami dodanymi przez pracowników (dopiero zaakceptowane wydarzenia pojawią się w aplikacji studentów): <br><br>
-     <img src="screenshots/ekran_admin_wydarzenia.PNG" height="500"><br><br>
+     <img src="screenshots/ekran_admin_wydarzenia.PNG"><br><br>
     Po dodaniu wydarzeń przez pracownika:<br><br>
-    <img src="screenshots/ekran_admin_wydarzenia_do_akceptacji.PNG" height="500"> <br><br>
+    <img src="screenshots/ekran_admin_wydarzenia_do_akceptacji.PNG"> <br><br>
     Lista rozwijana dla statusu dla każdego wydarzenia: <br><br>
    <img src="screenshots/ekran_admin_wydarzenia_okno_akceptacji.PNG" height="250">
     <img src="screenshots/ekran_admin_wydarzenia_zaakceptowane.PNG" height="400"> <br><br>
 5. Przeglądanie, sortowanie i zarządzanie zgłoszeniami błędów: <br><br>
-    <img src="screenshots/ekran_admin_zgloszenia.PNG" height="500"> <br><br>
+    <img src="screenshots/ekran_admin_zgloszenia.PNG"> <br><br>
 
 
 # Funkcjonalności studentów (użytkowników):
